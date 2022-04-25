@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'v2.2.4',
-        'version' => '2.2.4.0',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => 'e1d604fc0a07cbccef2a9bf7325ea0c6411c7ee8',
         'name' => 'hyperf/hyperf-skeleton',
         'dev' => true,
     ),
@@ -83,6 +83,15 @@
             'install_path' => __DIR__ . '/../doctrine/lexer',
             'aliases' => array(),
             'reference' => 'c268e882d4dbdd85e36e4ad69e02dc284f89d229',
+            'dev_requirement' => false,
+        ),
+        'easywechat-composer/easywechat-composer' => array(
+            'pretty_version' => '1.4.1',
+            'version' => '1.4.1.0',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/../easywechat-composer/easywechat-composer',
+            'aliases' => array(),
+            'reference' => '3fc6a7ab6d3853c0f4e2922539b56cc37ef361cd',
             'dev_requirement' => false,
         ),
         'fig/http-message-util' => array(
@@ -302,12 +311,12 @@
             'dev_requirement' => false,
         ),
         'hyperf/hyperf-skeleton' => array(
-            'pretty_version' => 'v2.2.4',
-            'version' => '2.2.4.0',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => 'e1d604fc0a07cbccef2a9bf7325ea0c6411c7ee8',
             'dev_requirement' => false,
         ),
         'hyperf/ide-helper' => array(
@@ -487,6 +496,15 @@
             'reference' => '210577fe3cf7badcc5814d99455df46564f3c077',
             'dev_requirement' => false,
         ),
+        'overtrue/socialite' => array(
+            'pretty_version' => '4.1.0',
+            'version' => '4.1.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../overtrue/socialite',
+            'aliases' => array(),
+            'reference' => 'f1ad926caced4227e97e2bb3459d4b5f0683dcca',
+            'dev_requirement' => false,
+        ),
         'phar-io/manifest' => array(
             'pretty_version' => '2.0.3',
             'version' => '2.0.3.0',
@@ -631,6 +649,15 @@
             'reference' => '12bc8879fb65aef2138b26fc633cb1e3620cffba',
             'dev_requirement' => true,
         ),
+        'pimple/pimple' => array(
+            'pretty_version' => 'v3.5.0',
+            'version' => '3.5.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../pimple/pimple',
+            'aliases' => array(),
+            'reference' => 'a94b3a4db7fb774b3d78dad2315ddc07629e1bed',
+            'dev_requirement' => false,
+        ),
         'psr/cache' => array(
             'pretty_version' => '3.0.0',
             'version' => '3.0.0.0',
@@ -639,6 +666,12 @@
             'aliases' => array(),
             'reference' => 'aa5030cfa5405eccfdcb1083ce040c2cb8d253bf',
             'dev_requirement' => false,
+        ),
+        'psr/cache-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '2.0|3.0',
+            ),
         ),
         'psr/container' => array(
             'pretty_version' => '2.0.2',
@@ -659,7 +692,7 @@
             'dev_requirement' => false,
         ),
         'psr/event-dispatcher-implementation' => array(
-            'dev_requirement' => true,
+            'dev_requirement' => false,
             'provided' => array(
                 0 => '1.0',
             ),
@@ -739,8 +772,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -751,6 +784,12 @@
             'aliases' => array(),
             'reference' => '408d5eafb83c57f6365a3ca330ff23aa4a5fa39b',
             'dev_requirement' => false,
+        ),
+        'psr/simple-cache-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0|2.0|3.0',
+            ),
         ),
         'ralouphie/getallheaders' => array(
             'pretty_version' => '3.0.3',
@@ -914,6 +953,30 @@
             'reference' => '8f82ba3b6af04a5bccb97c1654af992d1ee8b0fe',
             'dev_requirement' => true,
         ),
+        'symfony/cache' => array(
+            'pretty_version' => 'v6.0.6',
+            'version' => '6.0.6.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/cache',
+            'aliases' => array(),
+            'reference' => '57faad4e0d694f9961f517fdd5e6fbb1f6d0e04f',
+            'dev_requirement' => false,
+        ),
+        'symfony/cache-contracts' => array(
+            'pretty_version' => 'v3.0.0',
+            'version' => '3.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/cache-contracts',
+            'aliases' => array(),
+            'reference' => '2f7463f156cf9c665d9317e21a809c3bbff5754e',
+            'dev_requirement' => false,
+        ),
+        'symfony/cache-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.1|2.0|3.0',
+            ),
+        ),
         'symfony/console' => array(
             'pretty_version' => 'v5.4.7',
             'version' => '5.4.7.0',
@@ -939,7 +1002,7 @@
             'install_path' => __DIR__ . '/../symfony/event-dispatcher',
             'aliases' => array(),
             'reference' => '6472ea2dd415e925b90ca82be64b8bc6157f3934',
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/event-dispatcher-contracts' => array(
             'pretty_version' => 'v3.0.1',
@@ -948,10 +1011,10 @@
             'install_path' => __DIR__ . '/../symfony/event-dispatcher-contracts',
             'aliases' => array(),
             'reference' => '7bc61cc2db649b4637d331240c5346dcc7708051',
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/event-dispatcher-implementation' => array(
-            'dev_requirement' => true,
+            'dev_requirement' => false,
             'provided' => array(
                 0 => '2.0|3.0',
             ),
@@ -972,6 +1035,15 @@
             'install_path' => __DIR__ . '/../symfony/finder',
             'aliases' => array(),
             'reference' => '231313534dded84c7ecaa79d14bc5da4ccb69b7d',
+            'dev_requirement' => false,
+        ),
+        'symfony/http-foundation' => array(
+            'pretty_version' => 'v6.0.7',
+            'version' => '6.0.7.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/http-foundation',
+            'aliases' => array(),
+            'reference' => 'c816b26f03b6902dba79b352c84a17f53d815f0d',
             'dev_requirement' => false,
         ),
         'symfony/options-resolver' => array(
@@ -1055,6 +1127,15 @@
             'reference' => 'e13f6757e267d687e20ec5b26ccfcbbe511cd8f4',
             'dev_requirement' => true,
         ),
+        'symfony/psr-http-message-bridge' => array(
+            'pretty_version' => 'v2.1.2',
+            'version' => '2.1.2.0',
+            'type' => 'symfony-bridge',
+            'install_path' => __DIR__ . '/../symfony/psr-http-message-bridge',
+            'aliases' => array(),
+            'reference' => '22b37c8a3f6b5d94e9cdbd88e1270d96e2f97b34',
+            'dev_requirement' => false,
+        ),
         'symfony/service-contracts' => array(
             'pretty_version' => 'v3.0.1',
             'version' => '3.0.1.0',
@@ -1106,6 +1187,15 @@
                 0 => '2.3|3.0',
             ),
         ),
+        'symfony/var-exporter' => array(
+            'pretty_version' => 'v6.0.7',
+            'version' => '6.0.7.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/var-exporter',
+            'aliases' => array(),
+            'reference' => '5f1fddb1b3a8394dbfb234044e3ad620a26e1735',
+            'dev_requirement' => false,
+        ),
         'theseer/tokenizer' => array(
             'pretty_version' => '1.2.1',
             'version' => '1.2.1.0',
@@ -1122,6 +1212,15 @@
             'install_path' => __DIR__ . '/../vlucas/phpdotenv',
             'aliases' => array(),
             'reference' => '264dce589e7ce37a7ba99cb901eed8249fbec92f',
+            'dev_requirement' => false,
+        ),
+        'w7corp/easywechat' => array(
+            'pretty_version' => '5.x-dev',
+            'version' => '5.9999999.9999999.9999999-dev',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../w7corp/easywechat',
+            'aliases' => array(),
+            'reference' => 'fcabc4f0a7547713de9623f086ba486b87f4a433',
             'dev_requirement' => false,
         ),
         'webmozart/assert' => array(
