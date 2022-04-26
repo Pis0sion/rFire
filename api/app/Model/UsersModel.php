@@ -24,6 +24,9 @@ class UsersModel extends Model
         "userName", "openID", "userAvatar", "userState",
     ];
 
+    /**
+     * @return \Hyperf\Database\Model\Relations\BelongsToMany
+     */
     public function activity()
     {
         return $this->belongsToMany(ActivityModel::class,'a_registration_list','activityID','userID')->withPivot('score');
