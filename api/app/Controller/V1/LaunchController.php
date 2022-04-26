@@ -11,13 +11,13 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 /**
  * \App\Controller\V1\LaunchController
  */
-#[Controller(prefix: "/api/v1/")]
+#[Controller(prefix: "/api/v1")]
 class LaunchController
 {
     #[Inject]
     protected LaunchRepositories $launchRepositories;
 
-    #[RequestMapping(path: "launch", methods: "POST")]
+    #[RequestMapping(path: "launch", methods: "GET")]
     public function wechatLaunch(RequestInterface $request)
     {
         $code = $request->input("code");

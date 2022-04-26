@@ -24,5 +24,10 @@ class UsersModel extends Model
         "userName", "openID", "userAvatar", "userState",
     ];
 
+    public function activity()
+    {
+        return $this->belongsToMany(ActivityModel::class)->withPivot('score');
+    }
+
 
 }
