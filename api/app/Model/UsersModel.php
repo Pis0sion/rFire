@@ -21,12 +21,18 @@ class UsersModel extends Model
      * @var string[]
      */
     protected $fillable = [
-        "userName", "openID", "userAvatar", "userState",
+        "userName", "openID", "userAvatar", "userState","phone","age","cardID","sex"
     ];
+
+    public const CREATED_AT = "createdAt";
+
+    public const UPDATED_AT = "updatedAt";
+
+    public const DELETED_AT = "deletedAt";
 
     public function activity()
     {
-        return $this->belongsToMany(ActivityModel::class,'a_registration_list','activityID','userID')->withPivot('score');
+        return $this->belongsToMany(ActivityModel::class,'a_registration_list','userID','activityID')->withPivot('score');
     }
 
 

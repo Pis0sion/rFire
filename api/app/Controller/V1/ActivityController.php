@@ -21,4 +21,11 @@ class ActivityController
         return renderResponse($this->activityRepositories->list($search));
     }
 
+    #[RequestMapping(path: "my-activity-list",methods: "GET")]
+    public function myActivityList(RequestInterface $request)
+    {
+        $openId = $request->input("token");
+        return renderResponse($this->activityRepositories->myList($openId));
+    }
+
 }

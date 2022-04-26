@@ -23,12 +23,14 @@ class ActivityModel extends Model
 
     public const UPDATED_AT = "updatedAt";
 
+    public const DELETED_AT = "deletedAt";
+
     /**
      * @return \Hyperf\Database\Model\Relations\BelongsToMany
      */
     public function users()
     {
-        return $this->belongsToMany(UsersModel::class,'a_registration_list','userID','activityID')->withPivot('score');
+        return $this->belongsToMany(UsersModel::class,"a_registration_list",'activityID','userID')->withPivot("score");
     }
 
 

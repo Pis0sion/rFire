@@ -14,9 +14,9 @@ class ActivityRepositories
     {
         return $this->activityDto->list($search);
     }
-    public function myList(string $uuid)
+    public function myList(string $openId)
     {
-
+        return $this->activityDto->myList($openId);
     }
 
 }

@@ -3,6 +3,8 @@
 namespace App\Dto;
 
 use App\Model\ActivityModel;
+
+use App\Model\UsersModel;
 use Hyperf\Di\Annotation\Inject;
 
 class ActivityDto
@@ -10,12 +12,15 @@ class ActivityDto
     #[Inject]
     protected ActivityModel $activityModel;
 
+    #[Inject]
+    protected UsersModel $usersModel;
+
     public function list(array $condition)
     {
         $select = [
-            "a_activity.title","a_activity.address","a_activity.desc","a_activity.typeID","a_activity.categoryID","a_activity.organizerID"
+            "a_activity.id","a_activity.title","a_activity.address","a_activity.desc","a_activity.typeID","a_activity.categoryID","a_activity.organizerID"
         ];
-        $activityListBuilder = $this->activityModel->newQuery()->from("a_activity")->select($select);
+        $activityListBuilder = $this->activityModel->newQuery()->select($select)->with(["users"]);
 
         if (!empty($condition['startTime'])) {
             $activityListBuilder->where("a_activity.startAt", ">=", $condition["startTime"]);
@@ -30,6 +35,12 @@ class ActivityDto
         }
         $activityList = $activityListBuilder->orderByDesc("createdAt")->paginate();
         return $activityList;
+    }
+
+    public function myList(string $openId)
+    {
+        $userBuiler = $this->usersModel->newQuery()->where('openId',$openId);
+        return $userBuiler->select(['*'])->with(["activity"])->orderByDesc("createdAt")->paginate();
     }
 
 }
