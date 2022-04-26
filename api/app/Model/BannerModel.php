@@ -2,6 +2,9 @@
 
 namespace App\Model;
 
+/**
+ * \App\Model\BannerModel
+ */
 class BannerModel extends Model
 {
     /**

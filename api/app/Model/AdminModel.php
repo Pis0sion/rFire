@@ -2,6 +2,9 @@
 
 namespace App\Model;
 
+/**
+ * \App\Model\AdminModel
+ */
 class AdminModel extends Model
 {
     /**

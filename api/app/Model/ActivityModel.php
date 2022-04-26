@@ -2,6 +2,9 @@
 
 namespace App\Model;
 
+/**
+ * \App\Model\ActivityModel
+ */
 class ActivityModel extends Model
 {
     /**
@@ -20,6 +23,9 @@ class ActivityModel extends Model
 
     public const UPDATED_AT = "updatedAt";
 
+    /**
+     * @return \Hyperf\Database\Model\Relations\BelongsToMany
+     */
     public function users()
     {
         return $this->belongsToMany(UsersModel::class);
