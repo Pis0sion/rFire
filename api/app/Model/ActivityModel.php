@@ -28,7 +28,7 @@ class ActivityModel extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(UsersModel::class);
+        return $this->belongsToMany(UsersModel::class,'a_registration_list','userID','activityID')->withPivot('score');
     }
 
 

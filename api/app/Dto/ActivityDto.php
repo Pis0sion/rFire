@@ -26,11 +26,12 @@ class ActivityDto
         }
 
         if (!empty($condition["category"])) {
-            $activityListBuilder->where("a_activity.categoryID", "=".$condition["category"]);
+            $activityListBuilder->where("a_activity.categoryID", "=", $condition["category"]);
         }
         $activityList = $activityListBuilder->orderByDesc("createdAt")->paginate();
+
         $activityList->getCollection()->map(function ($activityModel) {
-            $activityModel->users = $activityModel->user()->orderByRaw("updated_at desc")->get();
+            $activityModel->users = $activityModel->users()->orderByRaw("updatedAt desc")->get();
             return $activityModel;
         });
         return $activityList;
