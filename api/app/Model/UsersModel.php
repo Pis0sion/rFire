@@ -17,6 +17,7 @@ class UsersModel extends Model
      */
     protected $table = "a_users";
 
+
     /**
      * @var string[]
      */

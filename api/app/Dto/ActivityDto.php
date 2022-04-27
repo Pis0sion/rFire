@@ -13,9 +13,11 @@ class ActivityDto
     public function list(array $condition)
     {
         $select = [
-            "a_activity.title","a_activity.address","a_activity.desc","a_activity.typeID","a_activity.categoryID","a_activity.organizerID"
+            "a_activity.title", "a_activity.address", "a_activity.desc", "a_activity.typeID", "a_activity.categoryID", "a_activity.organizerID"
         ];
-        $activityListBuilder = $this->activityModel->newQuery()->from("a_activity")->select($select);
+
+        $activityListBuilder = $this->activityModel->newQuery()->with(["users"])->select($select);
+
 
         if (!empty($condition['startTime'])) {
             $activityListBuilder->where("a_activity.startAt", ">=", $condition["startTime"]);
@@ -30,10 +32,7 @@ class ActivityDto
         }
         $activityList = $activityListBuilder->orderByDesc("createdAt")->paginate();
 
-        $activityList->getCollection()->map(function ($activityModel) {
-            $activityModel->users = $activityModel->users()->orderByRaw("updatedAt desc")->get();
-            return $activityModel;
-        });
+
         return $activityList;
     }
 
