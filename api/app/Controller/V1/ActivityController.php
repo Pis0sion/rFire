@@ -14,14 +14,20 @@ class ActivityController
     #[Inject]
     protected ActivityRepositories $activityRepositories;
 
-    #[RequestMapping(path: "activity-list", methods:"GET")]
+    #[RequestMapping(path: "activity-home-list", methods: "GET")]
+    public function activityList()
+    {
+        return renderResponse($this->activityRepositories->activityLatestByList());
+    }
+
+    #[RequestMapping(path: "activity-list", methods: "GET")]
     public function activityList(RequestInterface $request)
     {
         $search = $request->inputs(['category']);
         return renderResponse($this->activityRepositories->list($search));
     }
 
-    #[RequestMapping(path: "my-activity-list",methods: "GET")]
+    #[RequestMapping(path: "my-activity-list", methods: "GET")]
     public function myActivityList(RequestInterface $request)
     {
         $openId = $request->input("token");
