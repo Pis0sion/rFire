@@ -2,10 +2,12 @@
 
 namespace App\Model;
 
+use Hyperf\Database\Model\Relations\BelongsToMany;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * \App\Model\UsersModel
+ * @property mixed|void $activity
  */
 class UsersModel extends Model
 {
@@ -21,7 +23,7 @@ class UsersModel extends Model
      * @var string[]
      */
     protected $fillable = [
-        "userName", "openID", "userAvatar", "userState","phone","age","cardID","sex"
+        "userName", "openID", "userAvatar", "userState", "phone", "age", "cardID", "sex"
     ];
 
     public const CREATED_AT = "createdAt";
@@ -30,10 +32,33 @@ class UsersModel extends Model
 
     public const DELETED_AT = "deletedAt";
 
+    /**
+     * @return BelongsToMany
+     */
     public function activity()
     {
-        return $this->belongsToMany(ActivityModel::class,'a_registration_list','userID','activityID')->withPivot('score');
+        return $this->belongsToMany(ActivityModel::class, 'a_registration_list', 'userID', 'activityID')
+            ->withTimestamps()
+            ->withPivot('score');
     }
 
+    /**
+     * @param ActivityModel $activityModel
+     * @param array $pivotAttributes
+     * @return \Hyperf\Database\Model\Model
+     */
+    public function signUpActivity(ActivityModel $activityModel, array $pivotAttributes = [])
+    {
+        return $this->activity()->save($activityModel, $pivotAttributes);
+    }
+
+    /**
+     * @param ActivityModel $activityModel
+     * @return bool
+     */
+    public function whetherUserParticipatesInActivity(ActivityModel $activityModel)
+    {
+        return $this->activity->contains($activityModel);
+    }
 
 }

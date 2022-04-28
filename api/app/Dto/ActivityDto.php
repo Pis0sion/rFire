@@ -3,10 +3,10 @@
 namespace App\Dto;
 
 use App\Model\ActivityModel;
-
 use App\Model\UsersModel;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
+use Hyperf\Database\Model\Model;
 use Hyperf\Di\Annotation\Inject;
 
 /**
@@ -21,12 +21,21 @@ class ActivityDto
     protected UsersModel $usersModel;
 
     /**
+     * @param int $activityID
+     * @return Builder|Model|object|null
+     */
+    public function getActivityDetails(int $activityID)
+    {
+        return $this->activityModel->newQuery()->where("id", $activityID)->first();
+    }
+
+    /**
      * @return Builder[]|Collection
      */
     public function activityLatestByList()
     {
         $selectFields = [
-            "id", "title", "desc", "status", "startEnrollAt", "endEnrollAt", "startAt"
+            "id", "title", "desc", "cover", "status", "startEnrollAt", "endEnrollAt", "startAt"
         ];
 
         return $this->activityModel->newQuery()->select($selectFields)->limit(5)

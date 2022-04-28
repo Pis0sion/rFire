@@ -3,12 +3,15 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use Hyperf\Database\Model\Relations\BelongsTo;
 use Hyperf\Database\Model\Relations\BelongsToMany;
-use PhpParser\Node\Stmt\Catch_;
 
 /**
  * \App\Model\ActivityModel
  * @property mixed|void $startEnrollAt
+ * @property mixed|void $endEnrollAt
+ * @property mixed|void $startAt
+ * @property mixed|void $endAt
  */
 class ActivityModel extends Model
 {
@@ -30,6 +33,9 @@ class ActivityModel extends Model
 
     public const DELETED_AT = "deletedAt";
 
+    protected $casts = [
+        "status" => "integer",
+    ];
 
     /**
      * @return BelongsToMany
@@ -40,11 +46,43 @@ class ActivityModel extends Model
     }
 
     /**
-     * @return int
+     * @return BelongsTo
      */
-    public function getActivityStatusTextAttribute()
+    public function organizers()
     {
-        return 12;
+        return $this->belongsTo(OrganizerModel::class, "organizerID", "id");
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getActivityStatusTextAttribute(): string
+    {
+        $activityStatusText = "报名未开启";
+
+        if (Carbon::parse(Carbon::now())->gt($this->startEnrollAt) &&
+            Carbon::parse(Carbon::now())->lte($this->endEnrollAt)
+        ) {
+            $activityStatusText = "正在火热报名中";
+        }
+
+        if (Carbon::parse(Carbon::now())->gt($this->endEnrollAt) &&
+            Carbon::parse(Carbon::now())->lte($this->startAt)
+        ) {
+            $activityStatusText = "报名已截至，活动即将开始";
+        }
+
+        if (Carbon::parse(Carbon::now())->gt($this->startAt) &&
+            Carbon::parse(Carbon::now())->lte($this->endAt)
+        ) {
+            $activityStatusText = "活动正在火热进行中";
+        }
+
+        if (Carbon::parse(Carbon::now())->gt($this->endAt)) {
+            $activityStatusText = "活动已结束";
+        }
+        return $activityStatusText;
     }
 
 }
