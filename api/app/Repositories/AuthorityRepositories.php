@@ -10,11 +10,6 @@ class AuthorityRepositories
     #[Inject]
     protected AuthorityDto $authorityDto;
 
-    public function getAuthByUserID(int $userID)
-    {
-       return $this->authorityDto->getAuthByUserID($userID);
-    }
-
     public function getRoleByUserID(int $userID)
     {
         return $this->authorityDto->getRoleByUserID($userID);

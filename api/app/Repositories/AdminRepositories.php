@@ -35,4 +35,9 @@ class AdminRepositories
         return $this->adminDto->detailAdmin($id);
     }
 
+    public function login(array $userData)
+    {
+        return $this->adminDto->login($userData);
+    }
+
 }

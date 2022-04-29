@@ -34,7 +34,7 @@ class AdminController
     {
         $token = $request->input('token');
         $userID = 2;
-        return $this->authorityRepositories->getRoleByUserID($userID);
+        return renderResponse($this->authorityRepositories->getRoleByUserID($userID));
     }
 
     #[RequestMapping(path: 'is-in-roles',methods: 'GET')]
@@ -42,7 +42,7 @@ class AdminController
     {
         $token = $request->input('token');
         $userID = 2;
-        return $this->authorityRepositories->isInRoles($userID);
+        return renderResponse($this->authorityRepositories->isInRoles($userID));
     }
 
     #[RequestMapping(path: "add-admin", methods: "POST")]

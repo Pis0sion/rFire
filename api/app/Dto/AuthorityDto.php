@@ -20,15 +20,20 @@ class AuthorityDto
         return $userMenuList;
     }
 
+    /**
+     * @param int $userID
+     * @return mixed
+     */
     public function getRoleByUserID(int $userID)
     {
-        $select = [
-            "id","userName","nickName","userAvatar","phone","createdAt","updatedAt"
-        ];
-        $userModel = $this->adminModel->newQuery()->where('id',$userID);
-        return $userModel->select($select)->with(["roles"])->first();
+        $userModel = $this->adminModel->newQuery()->where('id',$userID)->select(['id','userName'])->first();
+        return $userModel->roles($userModel)->get();
     }
 
+    /**
+     * @param int $userID
+     * @return mixed
+     */
     public function isInRoles(int $userID)
     {
         $userModel = $this->adminModel->newQuery()->where('id',$userID)->select(['id','userName'])->first();

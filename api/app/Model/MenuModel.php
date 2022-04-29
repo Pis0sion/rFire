@@ -2,6 +2,9 @@
 
 namespace App\Model;
 
+/**
+ * @property mixed|void $roles
+ */
 class MenuModel extends Model
 {
     /**
