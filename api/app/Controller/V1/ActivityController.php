@@ -30,18 +30,18 @@ class ActivityController
         return renderResponse($this->activityRepositories->activity2Details($activityID));
     }
 
-    #[RequestMapping(path: "activity-enroll", methods: "POST")]
-    public function enroll2Activity(RequestInterface $request)
+    #[RequestMapping(path: "activity-categories", methods: "GET")]
+    public function getActivityCategories()
     {
-
+        return __FUNCTION__;
     }
 
-//    #[RequestMapping(path: "activity-list", methods: "GET")]
-//    public function activityList(RequestInterface $request)
-//    {
-//        $search = $request->inputs(['category']);
-//        return renderResponse($this->activityRepositories->list($search));
-//    }
+    #[RequestMapping(path: "activity-list", methods: "POST")]
+    public function activityListByCondition()
+    {
+        return __FUNCTION__ ;
+    }
+
 
     #[RequestMapping(path: "my-activity-list", methods: "GET")]
     public function myActivityList(RequestInterface $request)
