@@ -43,6 +43,17 @@ class UsersModel extends Model
     }
 
     /**
+     * 我参加的活动
+     * @return BelongsToMany
+     */
+    public function enollActivity()
+    {
+        return $this->belongsToMany(ActivityModel::class, 'a_registration_list', 'userID', 'activityID')
+            ->withTimestamps()
+            ->withPivot('score')->wherePivot('isEnoll','=',1);
+    }
+
+    /**
      * @param ActivityModel $activityModel
      * @param array $pivotAttributes
      * @return \Hyperf\Database\Model\Model

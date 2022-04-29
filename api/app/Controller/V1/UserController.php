@@ -3,6 +3,7 @@
 namespace App\Controller\V1;
 
 use App\Exception\ParametersException;
+use App\Repositories\ActivityRepositories;
 use App\Repositories\UserRepositories;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -14,6 +15,9 @@ class UserController
 {
     #[Inject]
     protected UserRepositories $userRepositories;
+
+    #[Inject]
+    protected ActivityRepositories $activityRepositories;
 
     #[RequestMapping(path: 'user-login', methods: 'POST')]
     public function login(RequestInterface $request)
@@ -58,5 +62,30 @@ class UserController
 
         return renderResponse();
     }
+
+    /**
+     * 我报名的活动列表
+     * @param RequestInterface $request
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    #[RequestMapping(path: "my-activity-list", methods: "POST")]
+    public function myActivityList(RequestInterface $request)
+    {
+        $openId = $request->input("token");
+        return renderResponse($this->activityRepositories->myList($openId));
+    }
+
+    /**
+     * 我参赛的活动列表
+     * @param RequestInterface $request
+     * @return void
+     */
+    #[RequestMapping(path: "my_enroll_activity",methods: "POST")]
+    public function myEnrollActivity(RequestInterface $request)
+    {
+        $openId = $request->input("token");
+        return renderResponse($this->activityRepositories->myList($openId,true));
+    }
+
 
 }

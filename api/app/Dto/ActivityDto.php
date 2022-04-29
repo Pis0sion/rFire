@@ -48,27 +48,49 @@ class ActivityDto
         $select = [
             "a_activity.id", "a_activity.title", "a_activity.address", "a_activity.desc", "a_activity.typeID", "a_activity.categoryID", "a_activity.organizerID"
         ];
-        $activityListBuilder = $this->activityModel->newQuery()->select($select)->with(["users"]);
+        //$activityListBuilder = $this->activityModel->newQuery()->select($select)->with(["users"]);
+        $activityListBuilder = $this->activityModel->newQuery()->select($select)->with(["organizers"]);
 
-        if (!empty($condition['startTime'])) {
+        if (!empty($condition["startTime"])) {
             $activityListBuilder->where("a_activity.startAt", ">=", $condition["startTime"]);
         }
 
         if (!empty($condition["endTime"])) {
             $activityListBuilder->where("a_activity.endAt", "<=", $condition["endTime"]);
         }
-
-        if (!empty($condition["category"])) {
-            $activityListBuilder->where("a_activity.categoryID", "=", $condition["category"]);
+        if (!empty($condition["startEnrollAt"])) {
+            $activityListBuilder->where("a_activity.startEnrollAt", ">=", $condition["startEnrollAt"]);
         }
+        if (!empty($condition["endEnrollAt"])) {
+            $activityListBuilder->where("a_activity.endEnrollAt", "<=", $condition["endEnrollAt"]);
+        }
+
+        if (!empty($condition["categoryID"])) {
+            $activityListBuilder->where("a_activity.categoryID", "=", $condition["categoryID"]);
+        }
+
+        if (!empty($condition["typeID"])) {
+            $activityListBuilder->where("a_activity.typeID", "=", $condition["typeID"]);
+        }
+
+        if (!empty($condition["organizerID"])) {
+            $activityListBuilder->where("a_activity.organizerID", "=", $condition["organizerID"]);
+        }
+
         $activityList = $activityListBuilder->orderByDesc("createdAt")->paginate();
         return $activityList;
     }
 
-    public function myList(string $openId)
+    public function myList(string $openId, bool $isEnoll = false)
     {
+        $select = ["id", "userName", "userAvatar"];
         $userBuiler = $this->usersModel->newQuery()->where('openId', $openId);
-        return $userBuiler->select(['*'])->with(["activity"])->orderByDesc("createdAt")->paginate();
+        if ($isEnoll) {
+            $userBuiler->select($select)->with(["enollActivity"]);
+        } else {
+            $userBuiler->select($select)->with(["activity"]);
+        }
+        return $userBuiler->orderByDesc("createdAt")->get();
     }
 
 }

@@ -3,22 +3,12 @@
 namespace App\Repositories;
 
 use App\Dto\AdminDto;
-use App\Exception\ParametersException;
 use Hyperf\Di\Annotation\Inject;
 
 class AdminRepositories
 {
     #[Inject]
     protected AdminDto $adminDto;
-
-    public function login(string $userName,string $password)
-    {
-        if ($this->adminDto->login($userName,$password)){
-            //返回token值
-            return '123456';
-        }
-        throw new ParametersException(errMessage: '用户名或密码错误');
-    }
 
     public function addAdmin(array $data)
     {

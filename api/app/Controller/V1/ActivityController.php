@@ -30,24 +30,12 @@ class ActivityController
         return renderResponse($this->activityRepositories->activity2Details($activityID));
     }
 
-    #[RequestMapping(path: "activity-categories", methods: "GET")]
-    public function getActivityCategories()
-    {
-        return __FUNCTION__;
-    }
-
     #[RequestMapping(path: "activity-list", methods: "POST")]
-    public function activityListByCondition()
+    public function activityListByCondition(RequestInterface $request)
     {
-        return __FUNCTION__ ;
+        $search = $request->inputs(["startTime","endTime","categoryID","organizerID","typeID","startEnrollAt","endEnrollAt"]);
+        return $this->activityRepositories->getListBySearch($search);
     }
 
-
-    #[RequestMapping(path: "my-activity-list", methods: "GET")]
-    public function myActivityList(RequestInterface $request)
-    {
-        $openId = $request->input("token");
-        return renderResponse($this->activityRepositories->myList($openId));
-    }
 
 }

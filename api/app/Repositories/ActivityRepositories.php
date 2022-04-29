@@ -44,14 +44,20 @@ class ActivityRepositories
         }]);
     }
 
+    public function getListBySearch(array $condtions)
+    {
+        return $this->activityDto->list($condtions);
+    }
+
     /**
      *
      * @param string $openId
      * @return LengthAwarePaginatorInterface
      */
-    public function myList(string $openId)
+    public function myList(string $openId, bool $isEnoll = false)
     {
-        return $this->activityDto->myList($openId);
+        return $this->activityDto->myList($openId, $isEnoll);
     }
+
 
 }

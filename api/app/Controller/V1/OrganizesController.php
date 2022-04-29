@@ -2,6 +2,8 @@
 
 namespace App\Controller\V1;
 
+use App\Repositories\OrganizesRepositories;
+use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 
@@ -11,10 +13,12 @@ use Hyperf\HttpServer\Annotation\RequestMapping;
 #[Controller(prefix: "/api/v1")]
 class OrganizesController
 {
+    #[Inject]
+    protected OrganizesRepositories $organizesRepositories;
 
     #[RequestMapping(path: 'organizes-list', methods:'GET')]
     public function getOrganizesList()
     {
-        return __FUNCTION__ ;
+       return renderResponse($this->organizesRepositories->getOrganizerList());
     }
 }

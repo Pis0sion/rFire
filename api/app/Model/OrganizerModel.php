@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Hyperf\Database\Model\Relations\HasMany;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -28,4 +29,12 @@ class OrganizerModel extends Model
     protected $fillable = [
         "name", "desc", "logo", "grade"
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function activity()
+    {
+        return $this->hasMany(ActivityModel::class, "organizerID", "id");
+    }
 }

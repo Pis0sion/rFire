@@ -52,7 +52,7 @@ class UserRepositories
         $userInfo = $this->usersDto->getUserInfo($openID);
 
         if (is_null($userInfo)) {
-            throw  new ParametersException(errMessage: "用户不存在");
+            throw  new ParametersException(errMessage: "当前用户不存在或者已被删除...");
         }
 
         /**
@@ -61,18 +61,18 @@ class UserRepositories
         $activity = $this->activityDto->getActivityDetails($activityID);
 
         if (is_null($activity)) {
-            throw  new ParametersException(errMessage: "活动不存在或者已删除");
+            throw  new ParametersException(errMessage: "当前活动不存在或者已删除...");
         }
 
         if ($userInfo->whetherUserParticipatesInActivity($activity)) {
-            throw  new ParametersException(errMessage: "当前用户已参与过该活动，不能重复报名");
+            throw  new ParametersException(errMessage: "当前用户已参与过该活动，不能重复报名...");
         }
 
         if (Carbon::now()->gte(Carbon::parse($activity->startEnrollAt)) && Carbon::now()->lt(Carbon::parse($activity->endEnrollAt))) {
             return $userInfo->signUpActivity($activity, ["score" => 0]);
         }
 
-        throw new ParametersException(errMessage: "当前不在活动报名时间内");
+        throw new ParametersException(errMessage: "当前不在活动报名时间内...");
     }
 
 }
