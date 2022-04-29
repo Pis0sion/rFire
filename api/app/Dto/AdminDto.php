@@ -2,6 +2,7 @@
 
 namespace App\Dto;
 
+use App\Exception\ParametersException;
 use App\Model\AdminModel;
 use Hyperf\Di\Annotation\Inject;
 
@@ -9,6 +10,15 @@ class AdminDto
 {
     #[Inject]
     protected AdminModel $adminModel;
+
+    public function login(string $userName, string $password)
+    {
+       $adminModel = $this->adminModel->newQuery()->where('userName',$userName)->first();
+       if (password_verify($password,$adminModel->password)){
+          return true;
+       }
+       return false;
+    }
 
     public function addAdmin(array $data)
     {
