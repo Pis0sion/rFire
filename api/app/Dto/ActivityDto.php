@@ -3,10 +3,15 @@
 namespace App\Dto;
 
 use App\Model\ActivityModel;
-
 use App\Model\UsersModel;
+use Hyperf\Database\Model\Builder;
+use Hyperf\Database\Model\Collection;
+use Hyperf\Database\Model\Model;
 use Hyperf\Di\Annotation\Inject;
 
+/**
+ * \App\Dto\ActivityDto
+ */
 class ActivityDto
 {
     #[Inject]
@@ -15,10 +20,33 @@ class ActivityDto
     #[Inject]
     protected UsersModel $usersModel;
 
+    /**
+     * @param int $activityID
+     * @return Builder|Model|object|null
+     */
+    public function getActivityDetails(int $activityID)
+    {
+        return $this->activityModel->newQuery()->where("id", $activityID)->first();
+    }
+
+    /**
+     * @return Builder[]|Collection
+     */
+    public function activityLatestByList()
+    {
+        $selectFields = [
+            "id", "title", "desc", "cover", "status", "startEnrollAt", "endEnrollAt", "startAt"
+        ];
+
+        return $this->activityModel->newQuery()->select($selectFields)->limit(5)
+            ->orderByDesc("startEnrollAt")
+            ->get()->map(fn($activity) => $activity->append(["activityStatusText"]));
+    }
+
     public function list(array $condition)
     {
         $select = [
-            "a_activity.id","a_activity.title","a_activity.address","a_activity.desc","a_activity.typeID","a_activity.categoryID","a_activity.organizerID"
+            "a_activity.id", "a_activity.title", "a_activity.address", "a_activity.desc", "a_activity.typeID", "a_activity.categoryID", "a_activity.organizerID"
         ];
         $activityListBuilder = $this->activityModel->newQuery()->select($select)->with(["users"]);
 
@@ -39,7 +67,7 @@ class ActivityDto
 
     public function myList(string $openId)
     {
-        $userBuiler = $this->usersModel->newQuery()->where('openId',$openId);
+        $userBuiler = $this->usersModel->newQuery()->where('openId', $openId);
         return $userBuiler->select(['*'])->with(["activity"])->orderByDesc("createdAt")->paginate();
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller\V1;
 
+use App\Exception\ParametersException;
 use App\Repositories\ActivityRepositories;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -14,14 +15,35 @@ class ActivityController
     #[Inject]
     protected ActivityRepositories $activityRepositories;
 
-    #[RequestMapping(path: "activity-list", methods:"GET")]
-    public function activityList(RequestInterface $request)
+    #[RequestMapping(path: "activity-home-list", methods: "GET")]
+    public function activityList()
     {
-        $search = $request->inputs(['category']);
-        return renderResponse($this->activityRepositories->list($search));
+        return renderResponse($this->activityRepositories->activityLatestByList());
     }
 
-    #[RequestMapping(path: "my-activity-list",methods: "GET")]
+    /**
+     * @throws ParametersException
+     */
+    #[RequestMapping(path: "activity-details/{activityID}", methods: "GET")]
+    public function activity2Details(int $activityID)
+    {
+        return renderResponse($this->activityRepositories->activity2Details($activityID));
+    }
+
+    #[RequestMapping(path: "activity-categories", methods: "GET")]
+    public function getActivityCategories()
+    {
+        return __FUNCTION__;
+    }
+
+    #[RequestMapping(path: "activity-list", methods: "POST")]
+    public function activityListByCondition()
+    {
+        return __FUNCTION__ ;
+    }
+
+
+    #[RequestMapping(path: "my-activity-list", methods: "GET")]
     public function myActivityList(RequestInterface $request)
     {
         $openId = $request->input("token");

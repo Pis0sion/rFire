@@ -13,14 +13,12 @@ class RegistrationModel extends Model
      * @var string[]
      */
     protected $fillable = [
-        "activityID", "userID","score"
+        "activityID", "userID", "score"
     ];
 
     public const CREATED_AT = "createdAt";
 
     public const UPDATED_AT = "updatedAt";
-
-
 
 
 }

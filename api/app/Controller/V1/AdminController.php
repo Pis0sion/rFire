@@ -9,7 +9,6 @@ use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
-
 #[Controller(prefix: '/api/v1')]
 class AdminController
 {
