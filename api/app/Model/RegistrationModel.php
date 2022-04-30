@@ -13,7 +13,7 @@ class RegistrationModel extends Model
      * @var string[]
      */
     protected $fillable = [
-        "activityID", "userID","score"
+        "activityID", "userID", "score"
     ];
 
 

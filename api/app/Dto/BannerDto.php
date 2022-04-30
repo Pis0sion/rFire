@@ -17,7 +17,6 @@ class BannerDto
 
     public function listBanner(int $limit)
     {
-        var_dump('dddd');
         return $this->bannerModel->newQuery()->limit($limit)->orderBy("createdAt","desc")->get();
     }
 

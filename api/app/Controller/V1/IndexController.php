@@ -19,7 +19,6 @@ class IndexController
     {
         $limit = $request->input('limit',3);
         return renderResponse($this->bannerRepositories->listBanner($limit));
-
     }
 
 }
