@@ -15,6 +15,7 @@ class ActivityController
     #[Inject]
     protected ActivityRepositories $activityRepositories;
 
+    // 显示当前报名的三条数据
     #[RequestMapping(path: "activity-home-list", methods: "GET")]
     public function activityList()
     {
@@ -33,7 +34,7 @@ class ActivityController
     #[RequestMapping(path: "activity-list", methods: "POST")]
     public function activityListByCondition(RequestInterface $request)
     {
-        $search = $request->inputs(["startTime","endTime","categoryID","organizerID","typeID","startEnrollAt","endEnrollAt"]);
+        $search = $request->inputs(["startTime", "endTime", "categoryID", "organizerID", "typeID", "startEnrollAt", "endEnrollAt"]);
         return $this->activityRepositories->getListBySearch($search);
     }
 

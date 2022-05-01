@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'e1d604fc0a07cbccef2a9bf7325ea0c6411c7ee8',
+        'reference' => 'c2ca8936c016cd48aeecfd881840a12af0d7f232',
         'name' => 'hyperf/hyperf-skeleton',
         'dev' => true,
     ),
@@ -156,6 +156,15 @@
             'aliases' => array(),
             'reference' => '8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
             'dev_requirement' => true,
+        ),
+        'hyperf/async-queue' => array(
+            'pretty_version' => 'v2.2.8',
+            'version' => '2.2.8.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../hyperf/async-queue',
+            'aliases' => array(),
+            'reference' => '7c6b230ef360e2659524cef371fdca52d88f1501',
+            'dev_requirement' => false,
         ),
         'hyperf/cache' => array(
             'pretty_version' => 'v2.2.15',
@@ -316,7 +325,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'e1d604fc0a07cbccef2a9bf7325ea0c6411c7ee8',
+            'reference' => 'c2ca8936c016cd48aeecfd881840a12af0d7f232',
             'dev_requirement' => false,
         ),
         'hyperf/ide-helper' => array(

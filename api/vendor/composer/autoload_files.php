@@ -27,4 +27,5 @@ return array(
     '9b38cf48e83f5d8f60375221cd213eee' => $vendorDir . '/phpstan/phpstan/bootstrap.php',
     '313a9b01f294d730dfc8ff43b9e56416' => $vendorDir . '/w7corp/easywechat/src/Kernel/Support/Helpers.php',
     '8cfe2b61cc956a1edbaf214308e8c9a1' => $vendorDir . '/w7corp/easywechat/src/Kernel/Helpers.php',
+    'e7c9933048ed6151dd8631dc4166ec59' => $baseDir . '/app/Functions.php',
 );

@@ -4,6 +4,7 @@ namespace App\Dto;
 
 use App\Model\ActivityModel;
 use App\Model\UsersModel;
+use Carbon\Carbon;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Model;
@@ -30,6 +31,18 @@ class ActivityDto
     }
 
     /**
+     * @param int $activityID
+     * @return Builder|Model|object|null
+     */
+    public function getActivityDetailsWithOrganizersAndCategories(int $activityID)
+    {
+        return $this->activityModel->newQuery()->with([
+            "organizers" => fn($query) => $query->select(["id", "name"]),
+            "categories" => fn($query) => $query->select(["id", "name"])
+        ])->where("id", $activityID)->first();
+    }
+
+    /**
      * @return Builder[]|Collection
      */
     public function activityLatestByList()
@@ -39,7 +52,8 @@ class ActivityDto
         ];
 
         return $this->activityModel->newQuery()->select($selectFields)->limit(5)
-            ->orderByDesc("startEnrollAt")
+            ->where("startEnrollAt", "<=", Carbon::now())
+            ->where("endEnrollAt", ">=", Carbon::now())
             ->get()->map(fn($activity) => $activity->append(["activityStatusText"]));
     }
 

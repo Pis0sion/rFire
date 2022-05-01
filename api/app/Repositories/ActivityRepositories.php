@@ -33,15 +33,13 @@ class ActivityRepositories
      */
     public function activity2Details(int $activityID)
     {
-        $activity = $this->activityDto->getActivityDetails($activityID);
+        $activity = $this->activityDto->getActivityDetailsWithOrganizersAndCategories($activityID);
 
         if (is_null($activity)) {
             throw new ParametersException();
         }
 
-        return $activity->load(["organizers" => function ($query) {
-            $query->select(["id", "name"]);
-        }]);
+        return $activity;
     }
 
     public function getListBySearch(array $condtions)
