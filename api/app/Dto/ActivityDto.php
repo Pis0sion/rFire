@@ -52,8 +52,7 @@ class ActivityDto
         ];
 
         return $this->activityModel->newQuery()->select($selectFields)->limit(5)
-            ->where("startEnrollAt", "<=", Carbon::now())
-            ->where("endEnrollAt", ">=", Carbon::now())
+            ->where("status", 2)
             ->get()->map(fn($activity) => $activity->append(["activityStatusText"]));
     }
 

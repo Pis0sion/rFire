@@ -93,13 +93,17 @@ class ActivityModel extends Model
     }
 
     /**
-     * @return bool
+     * @param int $activityStatus
+     * @return int
      */
-    public function changeNextActivityStatus()
+    public function changeNextActivityStatus(int $activityStatus)
     {
-        $this->increment("status");
+        if ($this->getAttribute("status") == $activityStatus) {
 
-        return $this->save();
+            return $this->increment("status", 1);
+        }
+
+        return 0;
     }
 
 }

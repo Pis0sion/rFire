@@ -29,8 +29,7 @@ class LaunchRepositories
     /**
      * @param string $code
      * @return array
-     * @throws TokenException
-     * @throws InvalidConfigException
+     * @throws InvalidConfigException|ParametersException
      */
     public function getAuth2Session(string $code)
     {
