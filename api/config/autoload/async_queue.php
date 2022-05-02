@@ -17,7 +17,7 @@ return [
         ],
         'channel' => '{queue}',
         'timeout' => 2,
-        'retry_seconds' => 5,
+        'retry_seconds' => [1, 5, 30],
         'handle_timeout' => 10,
         'processes' => 1,
         'concurrent' => [

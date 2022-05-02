@@ -122,6 +122,7 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
             'Hyperf\\Database\\' => 16,
             'Hyperf\\Contract\\' => 16,
             'Hyperf\\Context\\' => 15,
+            'Hyperf\\Constants\\' => 17,
             'Hyperf\\Config\\' => 14,
             'Hyperf\\Command\\' => 15,
             'Hyperf\\Cache\\' => 13,
@@ -440,6 +441,10 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         array (
             0 => __DIR__ . '/..' . '/hyperf/context/src',
         ),
+        'Hyperf\\Constants\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hyperf/constants/src',
+        ),
         'Hyperf\\Config\\' => 
         array (
             0 => __DIR__ . '/..' . '/hyperf/config/src',
@@ -583,6 +588,7 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         'App\\Exception\\SuccessfulException' => __DIR__ . '/../..' . '/app/Exception/SuccessfulException.php',
         'App\\Exception\\TokenException' => __DIR__ . '/../..' . '/app/Exception/TokenException.php',
         'App\\Exception\\UserNotFoundException' => __DIR__ . '/../..' . '/app/Exception/UserNotFoundException.php',
+        'App\\Job\\ActivityStateExchangeJob' => __DIR__ . '/../..' . '/app/Job/ActivityStateExchangeJob.php',
         'App\\Listener\\DbQueryExecutedListener' => __DIR__ . '/../..' . '/app/Listener/DbQueryExecutedListener.php',
         'App\\Model\\ActivityCategoriesModel' => __DIR__ . '/../..' . '/app/Model/ActivityCategoriesModel.php',
         'App\\Model\\ActivityModel' => __DIR__ . '/../..' . '/app/Model/ActivityModel.php',
@@ -597,6 +603,7 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         'App\\Model\\RoleMenuModel' => __DIR__ . '/../..' . '/app/Model/RoleMenuModel.php',
         'App\\Model\\RoleModel' => __DIR__ . '/../..' . '/app/Model/RoleModel.php',
         'App\\Model\\UsersModel' => __DIR__ . '/../..' . '/app/Model/UsersModel.php',
+        'App\\Process\\AsyncQueueConsumer' => __DIR__ . '/../..' . '/app/Process/AsyncQueueConsumer.php',
         'App\\Repositories\\ActivityRepositories' => __DIR__ . '/../..' . '/app/Repositories/ActivityRepositories.php',
         'App\\Repositories\\AdminRepositories' => __DIR__ . '/../..' . '/app/Repositories/AdminRepositories.php',
         'App\\Repositories\\AuthorityRepositories' => __DIR__ . '/../..' . '/app/Repositories/AuthorityRepositories.php',
@@ -606,6 +613,7 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         'App\\Repositories\\LaunchRepositories' => __DIR__ . '/../..' . '/app/Repositories/LaunchRepositories.php',
         'App\\Repositories\\OrganizesRepositories' => __DIR__ . '/../..' . '/app/Repositories/OrganizesRepositories.php',
         'App\\Repositories\\UserRepositories' => __DIR__ . '/../..' . '/app/Repositories/UserRepositories.php',
+        'App\\Servlet\\AsyncActivityServlet' => __DIR__ . '/../..' . '/app/Servlet/AsyncActivityServlet.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Carbon\\AbstractTranslator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/AbstractTranslator.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
@@ -1546,6 +1554,12 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         'Hyperf\\Config\\ConfigProvider' => __DIR__ . '/..' . '/hyperf/config/src/ConfigProvider.php',
         'Hyperf\\Config\\Listener\\RegisterPropertyHandlerListener' => __DIR__ . '/..' . '/hyperf/config/src/Listener/RegisterPropertyHandlerListener.php',
         'Hyperf\\Config\\ProviderConfig' => __DIR__ . '/..' . '/hyperf/config/src/ProviderConfig.php',
+        'Hyperf\\Constants\\AbstractConstants' => __DIR__ . '/..' . '/hyperf/constants/src/AbstractConstants.php',
+        'Hyperf\\Constants\\AnnotationReader' => __DIR__ . '/..' . '/hyperf/constants/src/AnnotationReader.php',
+        'Hyperf\\Constants\\Annotation\\Constants' => __DIR__ . '/..' . '/hyperf/constants/src/Annotation/Constants.php',
+        'Hyperf\\Constants\\ConfigProvider' => __DIR__ . '/..' . '/hyperf/constants/src/ConfigProvider.php',
+        'Hyperf\\Constants\\ConstantsCollector' => __DIR__ . '/..' . '/hyperf/constants/src/ConstantsCollector.php',
+        'Hyperf\\Constants\\Exception\\ConstantsException' => __DIR__ . '/..' . '/hyperf/constants/src/Exception/ConstantsException.php',
         'Hyperf\\Context\\Context' => __DIR__ . '/..' . '/hyperf/context/src/Context.php',
         'Hyperf\\Contract\\ApplicationInterface' => __DIR__ . '/..' . '/hyperf/contract/src/ApplicationInterface.php',
         'Hyperf\\Contract\\Castable' => __DIR__ . '/..' . '/hyperf/contract/src/Castable.php',

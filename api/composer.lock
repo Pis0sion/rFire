@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ae9a67287b4e81c3aafbc7202431b0f",
+    "content-hash": "c9aa297684d771829bc78f8542b98be9",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1121,6 +1121,67 @@
                 "source": "https://github.com/hyperf/hyperf"
             },
             "time": "2021-07-18T06:50:14+00:00"
+        },
+        {
+            "name": "hyperf/constants",
+            "version": "v2.2.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hyperf/constants.git",
+                "reference": "2cc989808defb6cf59feabdc0ca64a6600ed8b79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hyperf/constants/zipball/2cc989808defb6cf59feabdc0ca64a6600ed8b79",
+                "reference": "2cc989808defb6cf59feabdc0ca64a6600ed8b79",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "hyperf/di": "~2.2.0",
+                "hyperf/utils": "~2.2.0",
+                "php": ">=7.2"
+            },
+            "suggest": {
+                "hyperf/translation": "Required to use translation."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                },
+                "hyperf": {
+                    "config": "Hyperf\\Constants\\ConfigProvider"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hyperf\\Constants\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A constants component for hyperf.",
+            "homepage": "https://hyperf.io",
+            "keywords": [
+                "constants",
+                "hyperf",
+                "php"
+            ],
+            "support": {
+                "docs": "https://hyperf.wiki",
+                "issues": "https://github.com/hyperf/hyperf/issues",
+                "pull-request": "https://github.com/hyperf/hyperf/pulls",
+                "source": "https://github.com/hyperf/hyperf"
+            },
+            "time": "2021-11-02T10:40:16+00:00"
         },
         {
             "name": "hyperf/context",
@@ -9031,5 +9092,5 @@
         "php": ">=8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

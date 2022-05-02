@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c2ca8936c016cd48aeecfd881840a12af0d7f232',
+        'reference' => '24da5e75a9ac29ab4ef8274488a1cc0baabf597a',
         'name' => 'hyperf/hyperf-skeleton',
         'dev' => true,
     ),
@@ -193,6 +193,15 @@
             'reference' => 'ccdcc79ec244612c04f186e65b222ad778db75e9',
             'dev_requirement' => false,
         ),
+        'hyperf/constants' => array(
+            'pretty_version' => 'v2.2.15',
+            'version' => '2.2.15.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../hyperf/constants',
+            'aliases' => array(),
+            'reference' => '2cc989808defb6cf59feabdc0ca64a6600ed8b79',
+            'dev_requirement' => false,
+        ),
         'hyperf/context' => array(
             'pretty_version' => 'v2.2.0',
             'version' => '2.2.0.0',
@@ -325,7 +334,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c2ca8936c016cd48aeecfd881840a12af0d7f232',
+            'reference' => '24da5e75a9ac29ab4ef8274488a1cc0baabf597a',
             'dev_requirement' => false,
         ),
         'hyperf/ide-helper' => array(

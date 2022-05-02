@@ -1562,6 +1562,70 @@
             "install-path": "../hyperf/config"
         },
         {
+            "name": "hyperf/constants",
+            "version": "v2.2.15",
+            "version_normalized": "2.2.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hyperf/constants.git",
+                "reference": "2cc989808defb6cf59feabdc0ca64a6600ed8b79"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hyperf/constants/zipball/2cc989808defb6cf59feabdc0ca64a6600ed8b79",
+                "reference": "2cc989808defb6cf59feabdc0ca64a6600ed8b79",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "hyperf/di": "~2.2.0",
+                "hyperf/utils": "~2.2.0",
+                "php": ">=7.2"
+            },
+            "suggest": {
+                "hyperf/translation": "Required to use translation."
+            },
+            "time": "2021-11-02T10:40:16+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                },
+                "hyperf": {
+                    "config": "Hyperf\\Constants\\ConfigProvider"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Hyperf\\Constants\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A constants component for hyperf.",
+            "homepage": "https://hyperf.io",
+            "keywords": [
+                "constants",
+                "hyperf",
+                "php"
+            ],
+            "support": {
+                "docs": "https://hyperf.wiki",
+                "issues": "https://github.com/hyperf/hyperf/issues",
+                "pull-request": "https://github.com/hyperf/hyperf/pulls",
+                "source": "https://github.com/hyperf/hyperf"
+            },
+            "install-path": "../hyperf/constants"
+        },
+        {
             "name": "hyperf/context",
             "version": "v2.2.0",
             "version_normalized": "2.2.0.0",

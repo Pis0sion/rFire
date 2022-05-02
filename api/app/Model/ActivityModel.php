@@ -92,4 +92,14 @@ class ActivityModel extends Model
         return $activityStatusText;
     }
 
+    /**
+     * @return bool
+     */
+    public function changeNextActivityStatus()
+    {
+        $this->increment("status");
+
+        return $this->save();
+    }
+
 }

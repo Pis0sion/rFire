@@ -4,6 +4,8 @@ namespace App\Controller\V1;
 
 use App\Exception\ParametersException;
 use App\Repositories\ActivityRepositories;
+use App\Servlet\AsyncActivityServlet;
+use Carbon\Carbon;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
@@ -15,7 +17,9 @@ class ActivityController
     #[Inject]
     protected ActivityRepositories $activityRepositories;
 
-    // 显示当前报名的三条数据
+    #[Inject]
+    protected AsyncActivityServlet $asyncActivityServlet;
+
     #[RequestMapping(path: "activity-home-list", methods: "GET")]
     public function activityList()
     {
@@ -29,6 +33,13 @@ class ActivityController
     public function activity2Details(int $activityID)
     {
         return renderResponse($this->activityRepositories->activity2Details($activityID));
+    }
+
+    #[RequestMapping(path: "activity-push", methods: "GET")]
+    public function pushActivity()
+    {
+        $this->asyncActivityServlet->push(["activityID" => 2, "activityStatus" => 1], 10);
+        return renderResponse();
     }
 
     #[RequestMapping(path: "activity-list", methods: "POST")]

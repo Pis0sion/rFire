@@ -2,6 +2,7 @@
 
 namespace App\Servlet;
 
+use App\Job\ActivityStateExchangeJob;
 use Hyperf\AsyncQueue\Driver\DriverFactory;
 use Hyperf\AsyncQueue\Driver\DriverInterface;
 
@@ -30,6 +31,6 @@ class AsyncActivityServlet
      */
     public function push($params, int $delay = 0): bool
     {
-        
+        return $this->driverFactory->push(new ActivityStateExchangeJob($params), $delay);
     }
 }

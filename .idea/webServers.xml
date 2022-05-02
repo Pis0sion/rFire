@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="1cefb8fb-69ac-4d9c-9eb1-8546888152c9" name="rFire">
+        <fileTransfer rootFolder="/opt/rFire/internal" accessType="SFTP" host="60.205.171.95" port="22" sshConfigId="1165f6e1-3b05-400e-9736-c7d247d3218b" sshConfig="root@60.205.171.95:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
