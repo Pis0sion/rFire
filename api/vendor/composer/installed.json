@@ -2835,6 +2835,72 @@
             "install-path": "../hyperf/model-listener"
         },
         {
+            "name": "hyperf/paginator",
+            "version": "v2.2.0",
+            "version_normalized": "2.2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hyperf/paginator.git",
+                "reference": "d884a12771710bce66da6ddb494f52bcbd870721"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hyperf/paginator/zipball/d884a12771710bce66da6ddb494f52bcbd870721",
+                "reference": "d884a12771710bce66da6ddb494f52bcbd870721",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "hyperf/contract": "~2.2.0",
+                "hyperf/utils": "~2.2.0",
+                "php": ">=7.2"
+            },
+            "suggest": {
+                "hyperf/event": "Reqiured to use PageResolverListener.",
+                "hyperf/framework": "Reqiured to use PageResolverListener.",
+                "hyperf/http-server": "Reqiured to use PageResolverListener."
+            },
+            "time": "2021-07-18T06:50:14+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                },
+                "hyperf": {
+                    "config": "Hyperf\\Paginator\\ConfigProvider"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Hyperf\\Paginator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A paginator component for hyperf.",
+            "homepage": "https://hyperf.io",
+            "keywords": [
+                "hyperf",
+                "paginator",
+                "php"
+            ],
+            "support": {
+                "docs": "https://hyperf.wiki",
+                "issues": "https://github.com/hyperf/hyperf/issues",
+                "pull-request": "https://github.com/hyperf/hyperf/pulls",
+                "source": "https://github.com/hyperf/hyperf"
+            },
+            "install-path": "../hyperf/paginator"
+        },
+        {
             "name": "hyperf/pool",
             "version": "v2.2.0",
             "version_normalized": "2.2.0.0",
@@ -3378,6 +3444,66 @@
                 }
             ],
             "install-path": "../laminas/laminas-stdlib"
+        },
+        {
+            "name": "lysice/hyperf-redis-lock",
+            "version": "v2.1",
+            "version_normalized": "2.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Lysice/hyperf-redis-lock.git",
+                "reference": "641ca46ee97a1927b5b87397211512fe3303ded0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Lysice/hyperf-redis-lock/zipball/641ca46ee97a1927b5b87397211512fe3303ded0",
+                "reference": "641ca46ee97a1927b5b87397211512fe3303ded0",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.14",
+                "mockery/mockery": "^1.0",
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": ">=7.0",
+                "swoole/ide-helper": "dev-master",
+                "swow/swow": "dev-develop",
+                "symfony/var-dumper": "^5.1"
+            },
+            "time": "2021-10-18T09:07:27+00:00",
+            "type": "library",
+            "extra": {
+                "hyperf": {
+                    "config": "Hyperf\\Demo\\ConfigProvider"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Lysice\\HyperfRedisLock\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "keywords": [
+                "hyperf",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/Lysice/hyperf-redis-lock/issues",
+                "source": "https://github.com/Lysice/hyperf-redis-lock/tree/v2.1"
+            },
+            "install-path": "../lysice/hyperf-redis-lock"
         },
         {
             "name": "mockery/mockery",

@@ -9,6 +9,7 @@ use App\Servlet\AsyncActivityServlet;
 use Carbon\Carbon;
 use Hyperf\AsyncQueue\Job;
 use Hyperf\Utils\ApplicationContext;
+use Hyperf\Utils\HigherOrderTapProxy;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -28,13 +29,17 @@ class ActivityStateExchangeJob extends Job
     protected $maxAttempts = 2;
 
     /**
+     * @var int
+     */
+    protected int $deviation = 2;
+
+    /**
      * @param $params
      */
     public function __construct($params)
     {
         $this->params = $params;
     }
-
 
     /**
      * @throws ContainerExceptionInterface
@@ -66,13 +71,13 @@ class ActivityStateExchangeJob extends Job
 
         if ($this->determineActivityStatus($activityDetails, $activityStatus)) {
 
-            $activityDetails->changeNextActivityStatus();
+            $activityDetails->changeNextActivityStatus($activityStatus);
+
+            ++$this->params["activityStatus"];
 
             if ($this->params["activityStatus"] > ActivityStatusConstants::END_AT) {
                 return true;
             }
-
-            ++$this->params["activityStatus"];
         }
 
         $delay = $this->calculateNextProcessDelayTime($activityDetails, $this->params["activityStatus"]);
@@ -107,9 +112,7 @@ class ActivityStateExchangeJob extends Job
      */
     protected function determineActivityStatus(ActivityModel $activityModel, int $activityStatus)
     {
-        $processStatusFields = $this->getActivityProcessStartAtByState($activityStatus);
-
-        return Carbon::parse($activityModel->getAttribute($processStatusFields))->lte(Carbon::now());
+        return Carbon::parse($this->getActivityDetailsProcessTime($activityModel, $activityStatus))->addSeconds($this->deviation)->lte(Carbon::now());
     }
 
     /**
@@ -119,11 +122,19 @@ class ActivityStateExchangeJob extends Job
      */
     protected function calculateNextProcessDelayTime(ActivityModel $activityModel, int $activityStatus): int
     {
-        $delay = (int)Carbon::now()->diffInSeconds($activityModel->getAttribute(
-            $this->getActivityProcessStartAtByState($activityStatus)
-        ), false);
+        $delay = (int)Carbon::now()->diffInSeconds($this->getActivityDetailsProcessTime($activityModel, $activityStatus), false);
 
         return max(0, $delay);
+    }
+
+    /**
+     * @param ActivityModel $activityModel
+     * @param int $activityStatus
+     * @return HigherOrderTapProxy|mixed|void
+     */
+    protected function getActivityDetailsProcessTime(ActivityModel $activityModel, int $activityStatus)
+    {
+        return $activityModel->getAttribute($this->getActivityProcessStartAtByState($activityStatus));
     }
 
     /**

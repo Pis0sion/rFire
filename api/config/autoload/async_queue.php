@@ -15,9 +15,9 @@ return [
         'redis' => [
             'pool' => 'default',
         ],
-        'channel' => '{queue}',
+        'channel' => 'activity',
         'timeout' => 2,
-        'retry_seconds' => [1, 5, 30],
+        'retry_seconds' => [5, 10, 30],
         'handle_timeout' => 10,
         'processes' => 1,
         'concurrent' => [

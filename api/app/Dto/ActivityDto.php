@@ -5,6 +5,7 @@ namespace App\Dto;
 use App\Model\ActivityModel;
 use App\Model\UsersModel;
 use Carbon\Carbon;
+use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Model;
@@ -48,62 +49,43 @@ class ActivityDto
     public function activityLatestByList()
     {
         $selectFields = [
-            "id", "title", "desc", "cover", "status", "startEnrollAt", "endEnrollAt", "startAt"
+            "id", "title", "desc", "cover", "status", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
         ];
 
         return $this->activityModel->newQuery()->select($selectFields)->limit(5)
-            ->where("startEnrollAt", "<=", Carbon::now())
-            ->where("endEnrollAt", ">=", Carbon::now())
+            ->where("status", 2)
             ->get()->map(fn($activity) => $activity->append(["activityStatusText"]));
     }
 
-    public function list(array $condition)
+    /**
+     * @param array $condition
+     * @return LengthAwarePaginatorInterface
+     */
+    public function activityListByCondition(array $condition)
     {
-        $select = [
-            "a_activity.id", "a_activity.title", "a_activity.address", "a_activity.desc", "a_activity.typeID", "a_activity.categoryID", "a_activity.organizerID"
+        $selectFields = [
+            "id", "title", "desc", "cover", "status", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
         ];
 
-        $activityListBuilder = $this->activityModel->newQuery()->select($select)->with(["organizers"]);
+        $activityListBuilder = $this->activityModel->newQuery()->select($selectFields);
 
-        if (!empty($condition["startTime"])) {
-            $activityListBuilder->where("a_activity.startAt", ">=", $condition["startTime"]);
-        }
-
-        if (!empty($condition["endTime"])) {
-            $activityListBuilder->where("a_activity.endAt", "<=", $condition["endTime"]);
-        }
-        if (!empty($condition["startEnrollAt"])) {
-            $activityListBuilder->where("a_activity.startEnrollAt", ">=", $condition["startEnrollAt"]);
-        }
-        if (!empty($condition["endEnrollAt"])) {
-            $activityListBuilder->where("a_activity.endEnrollAt", "<=", $condition["endEnrollAt"]);
+        if ($condition["categoryID"] ?? false) {
+            $activityListBuilder->where("a_activity.categoryID", $condition["categoryID"]);
         }
 
-        if (!empty($condition["categoryID"])) {
-            $activityListBuilder->where("a_activity.categoryID", "=", $condition["categoryID"]);
+        if ($condition["typeID"] ?? false) {
+            $activityListBuilder->where("a_activity.typeID", $condition["typeID"]);
         }
 
-        if (!empty($condition["typeID"])) {
-            $activityListBuilder->where("a_activity.typeID", "=", $condition["typeID"]);
+        if ($condition["organizerID"] ?? false) {
+            $activityListBuilder->where("a_activity.organizerID", $condition["organizerID"]);
         }
 
-        if (!empty($condition["organizerID"])) {
-            $activityListBuilder->where("a_activity.organizerID", "=", $condition["organizerID"]);
+        if ($condition["status"] ?? false) {
+            $activityListBuilder->where("a_activity.status", $condition["status"]);
         }
 
         return $activityListBuilder->orderByDesc("createdAt")->paginate();
-    }
-
-    public function myList(string $openId, bool $isEnoll = false)
-    {
-        $select = ["id", "userName", "userAvatar"];
-        $userBuiler = $this->usersModel->newQuery()->where('openId', $openId);
-        if ($isEnoll) {
-            $userBuiler->select($select)->with(["enollActivity"]);
-        } else {
-            $userBuiler->select($select)->with(["activity"]);
-        }
-        return $userBuiler->orderByDesc("createdAt")->get();
     }
 
 }

@@ -42,20 +42,15 @@ class ActivityRepositories
         return $activity;
     }
 
-    public function getListBySearch(array $condtions)
-    {
-        return $this->activityDto->list($condtions);
-    }
-
     /**
-     *
-     * @param string $openId
+     * @param array $conditions
      * @return LengthAwarePaginatorInterface
      */
-    public function myList(string $openId, bool $isEnoll = false)
+    public function activityListByCondition(array $conditions)
     {
-        return $this->activityDto->myList($openId, $isEnoll);
+        return $this->activityDto->activityListByCondition($conditions);
     }
+
 
 
 }

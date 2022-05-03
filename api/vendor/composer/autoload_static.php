@@ -93,6 +93,7 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         ),
         'L' => 
         array (
+            'Lysice\\HyperfRedisLock\\' => 23,
             'Laminas\\Stdlib\\' => 15,
             'Laminas\\Mime\\' => 13,
         ),
@@ -104,6 +105,7 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
             'Hyperf\\Redis\\' => 13,
             'Hyperf\\Process\\' => 15,
             'Hyperf\\Pool\\' => 12,
+            'Hyperf\\Paginator\\' => 17,
             'Hyperf\\ModelListener\\' => 21,
             'Hyperf\\Memory\\' => 14,
             'Hyperf\\Macroable\\' => 17,
@@ -337,6 +339,10 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Lysice\\HyperfRedisLock\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lysice/hyperf-redis-lock/src',
+        ),
         'Laminas\\Stdlib\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-stdlib/src',
@@ -368,6 +374,10 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         'Hyperf\\Pool\\' => 
         array (
             0 => __DIR__ . '/..' . '/hyperf/pool/src',
+        ),
+        'Hyperf\\Paginator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hyperf/paginator/src',
         ),
         'Hyperf\\ModelListener\\' => 
         array (
@@ -561,6 +571,7 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
     );
 
     public static $classMap = array (
+        'App\\Constants\\ActivityStatusConstants' => __DIR__ . '/../..' . '/app/Constants/ActivityStatusConstants.php',
         'App\\Controller\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Controller/Admin/AdminController.php',
         'App\\Controller\\V1\\ActivityCategoriesController' => __DIR__ . '/../..' . '/app/Controller/V1/ActivityCategoriesController.php',
         'App\\Controller\\V1\\ActivityController' => __DIR__ . '/../..' . '/app/Controller/V1/ActivityController.php',
@@ -2042,6 +2053,12 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         'Hyperf\\ModelListener\\ConfigProvider' => __DIR__ . '/..' . '/hyperf/model-listener/src/ConfigProvider.php',
         'Hyperf\\ModelListener\\Listener\\ModelEventListener' => __DIR__ . '/..' . '/hyperf/model-listener/src/Listener/ModelEventListener.php',
         'Hyperf\\ModelListener\\Listener\\ModelHookEventListener' => __DIR__ . '/..' . '/hyperf/model-listener/src/Listener/ModelHookEventListener.php',
+        'Hyperf\\Paginator\\AbstractPaginator' => __DIR__ . '/..' . '/hyperf/paginator/src/AbstractPaginator.php',
+        'Hyperf\\Paginator\\ConfigProvider' => __DIR__ . '/..' . '/hyperf/paginator/src/ConfigProvider.php',
+        'Hyperf\\Paginator\\LengthAwarePaginator' => __DIR__ . '/..' . '/hyperf/paginator/src/LengthAwarePaginator.php',
+        'Hyperf\\Paginator\\Listener\\PageResolverListener' => __DIR__ . '/..' . '/hyperf/paginator/src/Listener/PageResolverListener.php',
+        'Hyperf\\Paginator\\Paginator' => __DIR__ . '/..' . '/hyperf/paginator/src/Paginator.php',
+        'Hyperf\\Paginator\\UrlWindow' => __DIR__ . '/..' . '/hyperf/paginator/src/UrlWindow.php',
         'Hyperf\\Pool\\Channel' => __DIR__ . '/..' . '/hyperf/pool/src/Channel.php',
         'Hyperf\\Pool\\ConfigProvider' => __DIR__ . '/..' . '/hyperf/pool/src/ConfigProvider.php',
         'Hyperf\\Pool\\Connection' => __DIR__ . '/..' . '/hyperf/pool/src/Connection.php',
@@ -2245,6 +2262,13 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         'Laminas\\Stdlib\\StringWrapper\\MbString' => __DIR__ . '/..' . '/laminas/laminas-stdlib/src/StringWrapper/MbString.php',
         'Laminas\\Stdlib\\StringWrapper\\Native' => __DIR__ . '/..' . '/laminas/laminas-stdlib/src/StringWrapper/Native.php',
         'Laminas\\Stdlib\\StringWrapper\\StringWrapperInterface' => __DIR__ . '/..' . '/laminas/laminas-stdlib/src/StringWrapper/StringWrapperInterface.php',
+        'Lysice\\HyperfRedisLock\\ConfigProvider' => __DIR__ . '/..' . '/lysice/hyperf-redis-lock/src/ConfigProvider.php',
+        'Lysice\\HyperfRedisLock\\InteractsWithTime' => __DIR__ . '/..' . '/lysice/hyperf-redis-lock/src/InteractsWithTime.php',
+        'Lysice\\HyperfRedisLock\\Lock' => __DIR__ . '/..' . '/lysice/hyperf-redis-lock/src/Lock.php',
+        'Lysice\\HyperfRedisLock\\LockContract' => __DIR__ . '/..' . '/lysice/hyperf-redis-lock/src/LockContract.php',
+        'Lysice\\HyperfRedisLock\\LockScripts' => __DIR__ . '/..' . '/lysice/hyperf-redis-lock/src/LockScripts.php',
+        'Lysice\\HyperfRedisLock\\LockTimeoutException' => __DIR__ . '/..' . '/lysice/hyperf-redis-lock/src/LockTimeoutException.php',
+        'Lysice\\HyperfRedisLock\\RedisLock' => __DIR__ . '/..' . '/lysice/hyperf-redis-lock/src/RedisLock.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',

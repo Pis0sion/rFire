@@ -16,9 +16,10 @@ class OrganizesController
     #[Inject]
     protected OrganizesRepositories $organizesRepositories;
 
-    #[RequestMapping(path: 'organizes-list', methods:'GET')]
+    #[RequestMapping(path: 'organizes-list', methods: 'GET')]
     public function getOrganizesList()
     {
-       return renderResponse($this->organizesRepositories->getOrganizerList());
+        $organizesList = $this->organizesRepositories->getOrganizerList();
+        return renderResponse($organizesList);
     }
 }

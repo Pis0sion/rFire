@@ -26,11 +26,20 @@ class UsersDto
         return $this->usersModel->newQuery()->firstOrCreate(["openID" => $openID], $users);
     }
 
+    /**
+     * @param string $openId
+     * @return Builder|Model|object|null
+     */
     public function getUserInfo(string $openId)
     {
         return $this->usersModel->newQuery()->where("openID",$openId)->first();
     }
 
+    /**
+     * @param string $openId
+     * @param array $userData
+     * @return int
+     */
     public function bindUserInfo(string $openId,array $userData)
     {
        return $this->usersModel->newQuery()->where("openID",$openId)->update($userData);

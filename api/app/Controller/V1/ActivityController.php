@@ -5,7 +5,6 @@ namespace App\Controller\V1;
 use App\Exception\ParametersException;
 use App\Repositories\ActivityRepositories;
 use App\Servlet\AsyncActivityServlet;
-use Carbon\Carbon;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
@@ -23,7 +22,8 @@ class ActivityController
     #[RequestMapping(path: "activity-home-list", methods: "GET")]
     public function activityList()
     {
-        return renderResponse($this->activityRepositories->activityLatestByList());
+        $activityList = $this->activityRepositories->activityLatestByList();
+        return renderResponse($activityList);
     }
 
     /**
@@ -32,22 +32,24 @@ class ActivityController
     #[RequestMapping(path: "activity-details/{activityID}", methods: "GET")]
     public function activity2Details(int $activityID)
     {
-        return renderResponse($this->activityRepositories->activity2Details($activityID));
+        $activityDetails = $this->activityRepositories->activity2Details($activityID);
+        return renderResponse($activityDetails);
     }
 
     #[RequestMapping(path: "activity-push", methods: "GET")]
     public function pushActivity()
     {
-        $this->asyncActivityServlet->push(["activityID" => 2, "activityStatus" => 1], 10);
+        $this->asyncActivityServlet->push(["activityID" => 4, "activityStatus" => 1], 10);
         return renderResponse();
     }
 
     #[RequestMapping(path: "activity-list", methods: "POST")]
     public function activityListByCondition(RequestInterface $request)
     {
-        $search = $request->inputs(["startTime", "endTime", "categoryID", "organizerID", "typeID", "startEnrollAt", "endEnrollAt"]);
-        return $this->activityRepositories->getListBySearch($search);
-    }
+        $searchParams = $request->inputs(["categoryID", "organizerID", "typeID", "status"]);
+        $activityList = $this->activityRepositories->activityListByCondition(array_filter($searchParams));
 
+        return renderResponse(paginate($activityList));
+    }
 
 }

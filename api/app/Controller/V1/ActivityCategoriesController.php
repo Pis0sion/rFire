@@ -20,9 +20,10 @@ class ActivityCategoriesController
     #[RequestMapping(path: "activity-categories", methods: "GET")]
     public function getActivityCategoriesList()
     {
-        return $this->categoriesRepositories->getActivityCategories();
-    }
+        $activityCategories = $this->categoriesRepositories->getActivityCategories();
 
+        return renderResponse($activityCategories);
+    }
 
 
 }
