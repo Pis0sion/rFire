@@ -3,7 +3,7 @@
 namespace App\Controller\V1;
 
 use App\Exception\ParametersException;
-use App\Repositories\ActivityRepositories;
+use App\Exception\TimeOutException;
 use App\Repositories\UserRepositories;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -17,19 +17,6 @@ class UserController
     #[Inject]
     protected UserRepositories $userRepositories;
 
-    #[Inject]
-    protected ActivityRepositories $activityRepositories;
-
-
-    #[RequestMapping(path: 'user-login', methods: 'POST')]
-    public function login(RequestInterface $request)
-    {
-        $openId = $request->input('token');
-        $userInfo = $request->inputs(['userAvatar', 'userName']);
-        $this->userRepositories->createUser($openId, $userInfo);
-
-        return renderResponse();
-    }
 
     /**
      * @throws ParametersException
@@ -47,15 +34,16 @@ class UserController
     #[RequestMapping(path: "bind-user-info", methods: "POST")]
     public function bind2Username(RequestInterface $request)
     {
-        $openId = $request->input('token');
-        $userInfo = $request->inputs(['userAvatar', 'userName']);
-        $this->userRepositories->bindUserInfo($openId, $userInfo);
+        $openId = $request->input("token");
+        $userInfo = $request->inputs(["userAvatar", "userName", "age", "sex", "phone", "cardID"]);
 
+        $this->userRepositories->bindUserInfo($openId, array_filter($userInfo));
         return renderResponse();
     }
 
     /**
      * @throws ParametersException
+     * @throws TimeOutException
      */
     #[RequestMapping(path: "activity-enroll/{activityID}", methods: "POST")]
     public function enroll2Activity(int $activityID, RequestInterface $request)
@@ -72,7 +60,7 @@ class UserController
      * @return ResponseInterface
      * @throws ParametersException
      */
-    #[RequestMapping(path: "my-activity-list", methods: "POST")]
+    #[RequestMapping(path: "enroll-activity-list", methods: "POST")]
     public function myActivityList(RequestInterface $request)
     {
         $openId = $request->input("token");
@@ -82,15 +70,16 @@ class UserController
     }
 
     /**
-     * 我参赛的活动列表
+     * 我参赛的活动列表 参加
      * @param RequestInterface $request
      * @return void
      */
-    #[RequestMapping(path: "my_enroll_activity", methods: "POST")]
+    #[RequestMapping(path: "participate-activity-list", methods: "POST")]
     public function myEnrollActivity(RequestInterface $request)
     {
         $openId = $request->input("token");
-        return renderResponse($this->activityRepositories->myList($openId, true));
+
+
     }
 
 

@@ -36,6 +36,14 @@ class ActivityController
         return renderResponse($activityDetails);
     }
 
+    #[RequestMapping(path: "is-participate-activity/{activityID}", methods: "POST")]
+    public function isUserParticipate2Activity(RequestInterface $request)
+    {
+        $openID = $request->input("token");
+
+        return __FUNCTION__;
+    }
+
     #[RequestMapping(path: "activity-push", methods: "GET")]
     public function pushActivity()
     {
@@ -48,7 +56,6 @@ class ActivityController
     {
         $searchParams = $request->inputs(["categoryID", "organizerID", "typeID", "status"]);
         $activityList = $this->activityRepositories->activityListByCondition(array_filter($searchParams));
-        
         return renderResponse(paginate($activityList));
     }
 

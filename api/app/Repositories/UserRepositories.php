@@ -6,9 +6,10 @@ use App\Constants\ActivityStatusConstants;
 use App\Dto\ActivityDto;
 use App\Dto\UsersDto;
 use App\Exception\ParametersException;
+use App\Exception\TimeOutException;
 use App\Model\ActivityModel;
 use App\Model\UsersModel;
-use Carbon\Carbon;
+use App\Servlet\Distributed2LockServlet;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Model;
@@ -21,6 +22,10 @@ class UserRepositories
 
     #[Inject]
     protected ActivityDto $activityDto;
+
+    #[Inject]
+    protected Distributed2LockServlet $distributed2LockServlet;
+
 
     public function createUser(string $openId, array $data)
     {
@@ -77,6 +82,7 @@ class UserRepositories
      * @param int $activityID
      * @return Model
      * @throws ParametersException
+     * @throws TimeOutException
      */
     public function enroll2Activity(string $openID, int $activityID)
     {
@@ -98,15 +104,18 @@ class UserRepositories
             throw new ParametersException(errMessage: "当前活动不存在或者已删除...");
         }
 
-        if ($userInfo->whetherUserParticipatesInActivity($activity)) {
-            throw new ParametersException(errMessage: "当前用户已参与过该活动，不能重复报名...");
-        }
+        return $this->distributed2LockServlet->distributed2Lock("enroll2Lock", function () use ($userInfo, $activity) {
 
-        if ($activity->getAttribute("status") == ActivityStatusConstants::END_ENROLL_AT) {
-            return $userInfo->signUpActivity($activity, ["score" => 0]);
-        }
+            if ($userInfo->whetherUserParticipatesInActivity($activity)) {
+                throw new ParametersException(errMessage: "当前用户已参与过该活动，不能重复报名...");
+            }
 
-        throw new ParametersException(errMessage: "当前不在活动报名时间内...");
+            if ($activity->getAttribute("status") == ActivityStatusConstants::END_ENROLL_AT) {
+                return $userInfo->signUpActivity($activity, ["score" => 0]);
+            }
+
+            throw new ParametersException(errMessage: "当前不在活动报名时间内...");
+        });
     }
 
 }

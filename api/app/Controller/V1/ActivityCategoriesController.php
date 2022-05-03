@@ -21,7 +21,6 @@ class ActivityCategoriesController
     public function getActivityCategoriesList()
     {
         $activityCategories = $this->categoriesRepositories->getActivityCategories();
-
         return renderResponse($activityCategories);
     }
 

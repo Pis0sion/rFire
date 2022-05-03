@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Exception\ParametersException;
 use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Relations\BelongsToMany;
 use Hyperf\Database\Model\SoftDeletes;
@@ -71,9 +72,10 @@ class UsersModel extends Model
     /**
      * @param ActivityModel $activityModel
      * @param array $pivotAttributes
-     * @return \Hyperf\Database\Model\Model
+     * @return bool
+     * @throws ParametersException
      */
-    public function signUpActivity(ActivityModel $activityModel, array $pivotAttributes = []): \Hyperf\Database\Model\Model
+    public function signUpActivity(ActivityModel $activityModel, array $pivotAttributes = [])
     {
         Db::beginTransaction();
 
@@ -81,11 +83,12 @@ class UsersModel extends Model
             $this->activity()->save($activityModel, $pivotAttributes);
             $activityModel->increment("esPerson");
             Db::commit();
+
+            return true;
         } catch (\Throwable $throwable) {
             Db::rollBack();
+            throw new ParametersException(errMessage: "报名失败，请稍后再试...");
         }
-
-        return true;
     }
 
     /**
