@@ -48,7 +48,7 @@ class ActivityController
     {
         $searchParams = $request->inputs(["categoryID", "organizerID", "typeID", "status"]);
         $activityList = $this->activityRepositories->activityListByCondition(array_filter($searchParams));
-
+        
         return renderResponse(paginate($activityList));
     }
 
