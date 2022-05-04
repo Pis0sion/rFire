@@ -13,13 +13,16 @@ declare(strict_types=1);
 
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Utils\ApplicationContext;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 if (!function_exists("response")) {
 
     function response()
     {
-        return make(\Hyperf\HttpServer\Contract\ResponseInterface::class);
+        return make(ResponseInterface::class);
     }
 }
 
@@ -52,6 +55,10 @@ if (!function_exists("paginate")) {
 }
 
 if (!function_exists("real2Ip")) {
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     function real2Ip()
     {
         $request = ApplicationContext::getContainer()->get(RequestInterface::class);

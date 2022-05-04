@@ -167,6 +167,7 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         'A' => 
         array (
             'App\\' => 4,
+            'AlphaSnow\\OSS\\AppServer\\' => 24,
         ),
     );
 
@@ -551,6 +552,10 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'AlphaSnow\\OSS\\AppServer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -571,6 +576,18 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
     );
 
     public static $classMap = array (
+        'AlphaSnow\\OSS\\AppServer\\AccessKey' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/AccessKey.php',
+        'AlphaSnow\\OSS\\AppServer\\ArrayEntity' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/ArrayEntity.php',
+        'AlphaSnow\\OSS\\AppServer\\Callback' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/Callback.php',
+        'AlphaSnow\\OSS\\AppServer\\CallbackParam' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/CallbackParam.php',
+        'AlphaSnow\\OSS\\AppServer\\Factory' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/Factory.php',
+        'AlphaSnow\\OSS\\AppServer\\LaravelCacheCallback' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/LaravelCacheCallback.php',
+        'AlphaSnow\\OSS\\AppServer\\LaravelCallback' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/LaravelCallback.php',
+        'AlphaSnow\\OSS\\AppServer\\Policy' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/Policy.php',
+        'AlphaSnow\\OSS\\AppServer\\ServiceProvider' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/ServiceProvider.php',
+        'AlphaSnow\\OSS\\AppServer\\SimpleCallback' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/SimpleCallback.php',
+        'AlphaSnow\\OSS\\AppServer\\StrandCallback' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/StrandCallback.php',
+        'AlphaSnow\\OSS\\AppServer\\Token' => __DIR__ . '/..' . '/alphasnow/aliyun-oss-appserver/src/Token.php',
         'App\\Constants\\ActivityStatusConstants' => __DIR__ . '/../..' . '/app/Constants/ActivityStatusConstants.php',
         'App\\Controller\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Controller/Admin/AdminController.php',
         'App\\Controller\\V1\\ActivityCategoriesController' => __DIR__ . '/../..' . '/app/Controller/V1/ActivityCategoriesController.php',
@@ -578,6 +595,7 @@ class ComposerStaticInitdb7daa76ea7eeb8bc861f3d73326dc31
         'App\\Controller\\V1\\ActivityNewsController' => __DIR__ . '/../..' . '/app/Controller/V1/ActivityNewsController.php',
         'App\\Controller\\V1\\AdminController' => __DIR__ . '/../..' . '/app/Controller/V1/AdminController.php',
         'App\\Controller\\V1\\AuthorityController' => __DIR__ . '/../..' . '/app/Controller/V1/AuthorityController.php',
+        'App\\Controller\\V1\\FileSystemController' => __DIR__ . '/../..' . '/app/Controller/V1/FileSystemController.php',
         'App\\Controller\\V1\\IndexController' => __DIR__ . '/../..' . '/app/Controller/V1/IndexController.php',
         'App\\Controller\\V1\\LaunchController' => __DIR__ . '/../..' . '/app/Controller/V1/LaunchController.php',
         'App\\Controller\\V1\\OrganizesController' => __DIR__ . '/../..' . '/app/Controller/V1/OrganizesController.php',

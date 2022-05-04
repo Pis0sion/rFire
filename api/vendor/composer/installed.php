@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '7aabffe8869b414a63602697be23934d47204da4',
+        'reference' => '7d45ea948bbdec706ad349c33eb364ad5a64cb92',
         'name' => 'hyperf/hyperf-skeleton',
         'dev' => true,
     ),
     'versions' => array(
+        'alphasnow/aliyun-oss-appserver' => array(
+            'pretty_version' => '0.3.1',
+            'version' => '0.3.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../alphasnow/aliyun-oss-appserver',
+            'aliases' => array(),
+            'reference' => '8dba85df10402970367736c1a7e5abd9226253d2',
+            'dev_requirement' => false,
+        ),
         'composer/pcre' => array(
             'pretty_version' => '3.0.0',
             'version' => '3.0.0.0',
@@ -334,7 +343,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '7aabffe8869b414a63602697be23934d47204da4',
+            'reference' => '7d45ea948bbdec706ad349c33eb364ad5a64cb92',
             'dev_requirement' => false,
         ),
         'hyperf/ide-helper' => array(

@@ -23,7 +23,7 @@ class LaunchRepositories
     protected Factory $applicationFactory;
 
     #[Value("wechat")]
-    protected $wechatConfigure;
+    protected array $wechatConfigure;
 
 
     /**
