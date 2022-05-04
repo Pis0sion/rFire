@@ -41,7 +41,7 @@ class ActivityController
     {
         $openID = $request->input("token");
 
-        return __FUNCTION__;
+
     }
 
     #[RequestMapping(path: "activity-push", methods: "GET")]

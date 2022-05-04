@@ -49,7 +49,7 @@ class ActivityDto
     public function activityLatestByList()
     {
         $selectFields = [
-            "id", "title", "desc", "cover", "status", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
+            "id", "title", "desc", "cover", "status", "acPerson", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
         ];
 
         return $this->activityModel->newQuery()->select($selectFields)->limit(5)
