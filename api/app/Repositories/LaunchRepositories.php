@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Dto\UsersDto;
 use App\Exception\ParametersException;
-use App\Exception\TokenException;
 use EasyWeChat\Factory;
 use EasyWeChat\Kernel\Exceptions\InvalidConfigException;
 use Hyperf\Config\Annotation\Value;
