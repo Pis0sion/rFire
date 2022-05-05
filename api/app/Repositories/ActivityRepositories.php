@@ -87,4 +87,10 @@ class ActivityRepositories
         return $userInfo->whetherUserParticipatesInActivity($activity);
     }
 
+
+    public function createActivityByManager(array $activityParameters)
+    {
+        return $this->activityDto->createActivity($activityParameters);
+    }
+
 }

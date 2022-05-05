@@ -10,6 +10,6 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 return [
-    "app_id" => "wx3c510aa95a747c76",
-    "secret" => "ee2990c30f114a81c3a0f01fcf9a29b2"
+    "app_id" => "wx1aac5f43bd98f874",
+    "secret" => "1fa766b58d319caf52b44f6662d725e0"
 ];

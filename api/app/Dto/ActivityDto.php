@@ -88,4 +88,12 @@ class ActivityDto
         return $activityListBuilder->orderByDesc("createdAt")->paginate();
     }
 
+    /**
+     * @param array $activityParameters
+     * @return bool
+     */
+    public function createActivity(array $activityParameters)
+    {
+        return $this->activityModel->fill($activityParameters)->save();
+    }
 }

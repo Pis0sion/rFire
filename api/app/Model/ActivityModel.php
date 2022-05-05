@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Carbon\Carbon;
+use Hyperf\Database\Model\Events\Saved;
 use Hyperf\Database\Model\Relations\BelongsTo;
 use Hyperf\Database\Model\Relations\BelongsToMany;
 
@@ -106,4 +107,11 @@ class ActivityModel extends Model
         return 0;
     }
 
+    /**
+     * @param Saved $event
+     */
+    public function saved(Saved $event)
+    {
+        var_dump($event);
+    }
 }

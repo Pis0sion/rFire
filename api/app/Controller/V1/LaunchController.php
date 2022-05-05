@@ -23,10 +23,11 @@ class LaunchController
      * @throws InvalidConfigException
      * @throws ParametersException
      */
-    #[RequestMapping(path: "launch", methods: "GET")]
+    #[RequestMapping(path: "launch", methods: "POST")]
     public function wechatLaunch(RequestInterface $request)
     {
         $code = $request->input("code");
+
         return $this->launchRepositories->getAuth2Session($code);
     }
 
