@@ -20,7 +20,8 @@ class ActivityCategoriesDto
      */
     public function getActivityCategories()
     {
-        return $this->activityCategoriesModel->newQuery()->orderByDesc("createdAt")->get();
+        return $this->activityCategoriesModel->newQuery()->select(["id", "name", "createdAt"])
+            ->orderByDesc("sort")->orderByDesc("createdAt")->get();
     }
 
 }

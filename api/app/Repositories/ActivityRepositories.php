@@ -3,7 +3,10 @@
 namespace App\Repositories;
 
 use App\Dto\ActivityDto;
+use App\Dto\UsersDto;
 use App\Exception\ParametersException;
+use App\Model\ActivityModel;
+use App\Model\UsersModel;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
@@ -17,6 +20,9 @@ class ActivityRepositories
 {
     #[Inject]
     protected ActivityDto $activityDto;
+
+    #[Inject]
+    protected UsersDto $usersDto;
 
     /**
      * @return Builder[]|Collection
@@ -52,5 +58,33 @@ class ActivityRepositories
     }
 
 
+    /**
+     * @param string $openID
+     * @param int $activityID
+     * @return bool
+     * @throws ParametersException
+     */
+    public function isUserParticipate2Activity(string $openID, int $activityID)
+    {
+        /**
+         * @var UsersModel $userInfo
+         */
+        $userInfo = $this->usersDto->getUserInfo($openID);
+
+        if (is_null($userInfo)) {
+            throw new ParametersException(errMessage: "当前用户不存在或者已被删除...");
+        }
+
+        /**
+         * @var ActivityModel $activity
+         */
+        $activity = $this->activityDto->getActivityDetails($activityID);
+
+        if (is_null($activity)) {
+            throw new ParametersException(errMessage: "当前活动不存在或者已删除...");
+        }
+
+        return $userInfo->whetherUserParticipatesInActivity($activity);
+    }
 
 }

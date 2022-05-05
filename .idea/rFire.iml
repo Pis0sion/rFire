@@ -133,8 +133,7 @@
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/nesbot/carbon" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/phpspec/prophecy" />
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/hyperf/constants" />
-      <excludeFolder url="file://$MODULE_DIR$/api/vendor/hyperf/flysystem-oss" />
-      <excludeFolder url="file://$MODULE_DIR$/api/vendor/aliyuncs/oss-sdk-php" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/alphasnow/aliyun-oss-appserver" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

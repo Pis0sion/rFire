@@ -23,7 +23,8 @@ class OrganizesDto
      */
     public function getOrganizerList()
     {
-        return $this->organizerModel->newQuery()->orderByDesc("createdAt")->get();
+        return $this->organizerModel->newQuery()->select(["id", "name", "grade", "createdAt"])
+            ->orderByDesc("createdAt")->get();
     }
 
 

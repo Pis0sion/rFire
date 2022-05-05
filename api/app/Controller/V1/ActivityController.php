@@ -36,12 +36,16 @@ class ActivityController
         return renderResponse($activityDetails);
     }
 
+    /**
+     * @throws ParametersException
+     */
     #[RequestMapping(path: "is-participate-activity/{activityID}", methods: "POST")]
-    public function isUserParticipate2Activity(RequestInterface $request)
+    public function isUserParticipate2Activity(int $activityID, RequestInterface $request)
     {
         $openID = $request->input("token");
+        $isParticipate = $this->activityRepositories->isUserParticipate2Activity($openID, $activityID);
 
-
+        return renderResponse(compact("isParticipate"));
     }
 
     #[RequestMapping(path: "activity-push", methods: "GET")]

@@ -20,7 +20,9 @@ class FileSystemController
     #[RequestMapping(path: "sign/url", methods: "POST")]
     public function directTransferBySignUrl()
     {
-        return $this->fileSystemRepositories->signature2DirectTransfer();
+        $signature = $this->fileSystemRepositories->signature2DirectTransfer();
+
+        return renderResponse($signature);
     }
 
     #[RequestMapping(path: "oss/callback", methods: "POST")]

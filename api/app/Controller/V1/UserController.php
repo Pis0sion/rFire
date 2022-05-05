@@ -21,7 +21,7 @@ class UserController
     /**
      * @throws ParametersException
      */
-    #[RequestMapping(path: 'get-user-info', methods: 'POST')]
+    #[RequestMapping(path: "get-user-info", methods: "POST")]
     public function getUserInfo(RequestInterface $request)
     {
         $openId = $request->input("token");
@@ -70,7 +70,7 @@ class UserController
     }
 
     /**
-     * 我参赛的活动列表 参加
+     * 待参赛的活动列表 参加
      * @param RequestInterface $request
      * @return void
      */
@@ -79,7 +79,7 @@ class UserController
     {
         $openId = $request->input("token");
 
-
+        
     }
 
 

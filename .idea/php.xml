@@ -135,11 +135,7 @@
       <path value="$PROJECT_DIR$/api/vendor/phpspec/prophecy" />
       <path value="$PROJECT_DIR$/api/vendor/hyperf/constants" />
       <path value="$PROJECT_DIR$/api/vendor/lysice/hyperf-redis-lock" />
-      <path value="$PROJECT_DIR$/api/vendor/hyperf/filesystem" />
-      <path value="$PROJECT_DIR$/api/vendor/league/mime-type-detection" />
-      <path value="$PROJECT_DIR$/api/vendor/league/flysystem" />
-      <path value="$PROJECT_DIR$/api/vendor/hyperf/flysystem-oss" />
-      <path value="$PROJECT_DIR$/api/vendor/aliyuncs/oss-sdk-php" />
+      <path value="$PROJECT_DIR$/api/vendor/alphasnow/aliyun-oss-appserver" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

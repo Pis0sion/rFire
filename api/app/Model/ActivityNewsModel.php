@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Hyperf\Database\Model\Relations\BelongsTo;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
@@ -9,13 +10,12 @@ use Hyperf\Database\Model\SoftDeletes;
  */
 class ActivityNewsModel extends Model
 {
-
     use SoftDeletes;
 
     /**
      * @var string
      */
-    protected $table = "a_activity_news";
+    protected $table = "a_news";
 
     public const CREATED_AT = "createdAt";
 
@@ -23,4 +23,11 @@ class ActivityNewsModel extends Model
 
     public const DELETED_AT = "deletedAt";
 
+    /**
+     * @return BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(ActivityNewsCategoryModel::class, "categoryID", "id");
+    }
 }
