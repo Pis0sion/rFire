@@ -21,5 +21,4 @@ class RegistrationModel extends Model
 
     public const UPDATED_AT = "updatedAt";
 
-
 }

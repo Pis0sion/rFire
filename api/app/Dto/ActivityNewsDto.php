@@ -24,7 +24,9 @@ class ActivityNewsDto
     public function getActivityHomeNewsList()
     {
         $selectFields = ["id", "title", "categoryID", "cover", "createdAt"];
-        return $this->activityNewsModel->newQuery()->limit(5)->orderByDesc("createdAt")->get($selectFields);
+        return $this->activityNewsModel->newQuery()
+            ->with(["category" => fn($query) => $query->select("id", "name")])
+            ->limit(5)->orderByDesc("createdAt")->get($selectFields);
     }
 
     /**
@@ -34,7 +36,8 @@ class ActivityNewsDto
     {
         $selectFields = ["id", "title", "categoryID", "cover", "createdAt"];
         return $this->activityNewsModel->newQuery()->where($searchParams)
-            ->with(["category" => fn($query) => $query->select("id", "name")])->select(($selectFields))->orderByDesc("createdAt")->paginate();
+            ->with(["category" => fn($query) => $query->select("id", "name")])
+            ->select(($selectFields))->orderByDesc("createdAt")->paginate();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Constants\ActivityStatusConstants;
 use App\Exception\ParametersException;
 use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Relations\BelongsToMany;
@@ -42,7 +43,7 @@ class UsersModel extends Model
      */
     public function activity()
     {
-        return $this->belongsToMany(ActivityModel::class, 'a_registration_list', 'userID', 'activityID')
+        return $this->belongsToMany(ActivityModel::class, "a_registration_list", "userID", "activityID")
             ->withTimestamps()
             ->withPivot('score');
     }
@@ -53,21 +54,40 @@ class UsersModel extends Model
     public function enrollActivity()
     {
         $selectFields = [
-            "a_activity.id", "a_activity.title", "a_activity.desc", "a_activity.cover", "a_activity.status", "a_activity.startEnrollAt",
-            "a_activity.endEnrollAt", "a_activity.startAt", "a_activity.endAt"
+            "a_activity.id", "a_activity.title", "a_activity.desc", "a_activity.cover", "a_activity.status",
+            "a_activity.startEnrollAt", "a_activity.endEnrollAt", "a_activity.startAt", "a_activity.endAt"
         ];
 
         return $this->activity()->select($selectFields)->get()->makeHidden(["pivot"]);
     }
 
     /**
-     * @return BelongsToMany
+     * @return Collection
+     */
+    public function pendingActivity()
+    {
+        $selectFields = [
+            "a_activity.id", "a_activity.title", "a_activity.desc", "a_activity.cover", "a_activity.status",
+            "a_activity.startEnrollAt", "a_activity.endEnrollAt", "a_activity.startAt", "a_activity.endAt"
+        ];
+
+        return $this->activity()->wherePivot("isActivity", "=", 0)
+            ->where("status", ActivityStatusConstants::END_AT)
+            ->select($selectFields)->get();
+    }
+
+    /**
+     * @return Collection
      */
     public function participateActivity()
     {
-        return $this->activity()->wherePivot('isActivity', '=', 1);
-    }
+        $selectFields = [
+            "a_activity.id", "a_activity.title", "a_activity.desc", "a_activity.cover", "a_activity.status",
+            "a_activity.startEnrollAt", "a_activity.endEnrollAt", "a_activity.startAt", "a_activity.endAt"
+        ];
 
+        return $this->activity()->select($selectFields)->wherePivot("isActivity", "=", 1)->get();
+    }
 
     /**
      * @param ActivityModel $activityModel

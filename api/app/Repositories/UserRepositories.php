@@ -27,11 +27,6 @@ class UserRepositories
     protected Distributed2LockServlet $distributed2LockServlet;
 
 
-    public function createUser(string $openId, array $data)
-    {
-        return $this->usersDto->createOrFindUserByOpenID($openId, $data);
-    }
-
     /**
      * @param string $openId
      * @return Builder|Model|object
@@ -118,4 +113,41 @@ class UserRepositories
         });
     }
 
+    /**
+     * @param string $openID
+     * @return Collection
+     * @throws ParametersException
+     */
+    public function myPendingActivityList(string $openID)
+    {
+        /**
+         * @var UsersModel $userInfo
+         */
+        $userInfo = $this->usersDto->getUserInfo($openID);
+
+        if (is_null($userInfo)) {
+            throw new ParametersException(errMessage: "当前用户不存在或者已被删除...");
+        }
+
+        return $userInfo->pendingActivity();
+    }
+
+    /**
+     * @param string $openID
+     * @return Collection
+     * @throws ParametersException
+     */
+    public function myParticipatedActivityList(string $openID)
+    {
+        /**
+         * @var UsersModel $userInfo
+         */
+        $userInfo = $this->usersDto->getUserInfo($openID);
+
+        if (is_null($userInfo)) {
+            throw new ParametersException(errMessage: "当前用户不存在或者已被删除...");
+        }
+
+        return $userInfo->participateActivity();
+    }
 }

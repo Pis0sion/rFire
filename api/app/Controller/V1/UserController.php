@@ -70,17 +70,31 @@ class UserController
     }
 
     /**
-     * 待参赛的活动列表 参加
      * @param RequestInterface $request
      * @return void
+     * @throws ParametersException
      */
-    #[RequestMapping(path: "participate-activity-list", methods: "POST")]
-    public function myEnrollActivity(RequestInterface $request)
+    #[RequestMapping(path: "pending-activity-list", methods: "POST")]
+    public function myPendingActivity(RequestInterface $request)
     {
         $openId = $request->input("token");
+        $pendingActivityList = $this->userRepositories->myPendingActivityList($openId);
 
-        
+        return renderResponse($pendingActivityList);
     }
 
+    /**
+     * @param RequestInterface $request
+     * @return void
+     * @throws ParametersException
+     */
+    #[RequestMapping(path: "participated-activity-list", methods: "POST")]
+    public function myParticipatedActivity(RequestInterface $request)
+    {
+        $openId = $request->input("token");
+        $participatedActivityList = $this->userRepositories->myParticipatedActivityList($openId);
+
+        return renderResponse($participatedActivityList);
+    }
 
 }
