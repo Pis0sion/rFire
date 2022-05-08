@@ -7,6 +7,7 @@ use App\Dto\UsersDto;
 use App\Exception\ParametersException;
 use App\Model\ActivityModel;
 use App\Model\UsersModel;
+use Carbon\Carbon;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
@@ -87,9 +88,30 @@ class ActivityRepositories
         return $userInfo->whetherUserParticipatesInActivity($activity);
     }
 
-
+    /**
+     * @param array $activityParameters
+     * @return bool
+     * @throws ParametersException
+     */
     public function createActivityByManager(array $activityParameters)
     {
+
+        if (Carbon::now()->gte(Carbon::parse($activityParameters["startEnrollAt"]))) {
+            throw new ParametersException(errMessage: "报名时间不能晚于当前时间...");
+        }
+
+        if (Carbon::parse($activityParameters["startEnrollAt"])->gt(Carbon::parse($activityParameters["endEnrollAt"]))) {
+            throw new ParametersException("报名开始时间不能晚于报名结束时间...");
+        }
+
+        if (Carbon::parse($activityParameters["endEnrollAt"])->gt(Carbon::parse($activityParameters["startAt"]))) {
+            throw new ParametersException("报名结束时间不能晚于活动开始时间...");
+        }
+
+        if (Carbon::parse($activityParameters["startAt"])->gt(Carbon::parse($activityParameters["endAt"]))) {
+            throw new ParametersException("活动开始时间不能晚于活动结束时间...");
+        }
+
         return $this->activityDto->createActivity($activityParameters);
     }
 

@@ -124,7 +124,7 @@ class ActivityStateExchangeJob extends Job
     {
         $delay = (int)Carbon::now()->diffInSeconds($this->getActivityDetailsProcessTime($activityModel, $activityStatus), false);
 
-        return max(0, $delay);
+        return max($this->deviation, $delay);
     }
 
     /**

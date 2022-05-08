@@ -2,10 +2,13 @@
 
 namespace App\Model;
 
+use App\Constants\ActivityStatusConstants;
+use App\Servlet\AsyncActivityServlet;
 use Carbon\Carbon;
 use Hyperf\Database\Model\Events\Saved;
 use Hyperf\Database\Model\Relations\BelongsTo;
 use Hyperf\Database\Model\Relations\BelongsToMany;
+use Hyperf\Di\Annotation\Inject;
 
 /**
  * \App\Model\ActivityModel
@@ -16,6 +19,9 @@ use Hyperf\Database\Model\Relations\BelongsToMany;
  */
 class ActivityModel extends Model
 {
+    #[Inject]
+    protected AsyncActivityServlet $asyncActivityServlet;
+
     /**
      * @var string
      */
@@ -112,6 +118,13 @@ class ActivityModel extends Model
      */
     public function saved(Saved $event)
     {
-        var_dump($event);
+        $activityModel = $event->getModel();
+
+        $delay = Carbon::now()->diffInSeconds($activityModel->getAttribute("startEnrollAt"));
+
+        $this->asyncActivityServlet->push([
+            "activityID" => $activityModel->getAttribute("id"),
+            "activityStatus" => ActivityStatusConstants::START_ENROLL_AT,
+        ], $delay);
     }
 }

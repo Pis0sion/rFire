@@ -37,7 +37,7 @@ class ActivityNewsDto
         $selectFields = ["id", "title", "categoryID", "cover", "createdAt"];
         return $this->activityNewsModel->newQuery()->where($searchParams)
             ->with(["category" => fn($query) => $query->select("id", "name")])
-            ->select(($selectFields))->orderByDesc("createdAt")->paginate();
+            ->select(($selectFields))->orderByDesc("createdAt")->paginate(5);
     }
 
     /**

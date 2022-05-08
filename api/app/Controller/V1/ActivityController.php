@@ -56,16 +56,11 @@ class ActivityController
         return renderResponse(paginate($activityList));
     }
 
-    #[RequestMapping(path: "activity-create", methods: "POST")]
+    #[RequestMapping(path: "activity-push", methods: "POST")]
     public function createActivity(RequestInterface $request)
     {
-        $activityParameters = $request->inputs([
-            "title", "address", "desc", "cover", "typeID", "categoryID",
-            "organizerID", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
-        ]);
-
-        $this->activityRepositories->createActivityByManager($activityParameters);
-
+        $activityParameters = $request->inputs(["activityID", "activityStatus"]);
+        $this->asyncActivityServlet->push($activityParameters);
         return renderResponse();
     }
 }

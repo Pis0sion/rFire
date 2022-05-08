@@ -49,6 +49,7 @@ class LaunchRepositories
 
             return [
                 "token" => $users->getAttribute("openID"),
+                "sessionKey" => $sessionProfile["session_key"],
                 "users" => $userProfile,
             ];
         }

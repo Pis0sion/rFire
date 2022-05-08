@@ -85,7 +85,7 @@ class ActivityDto
             $activityListBuilder->where("a_activity.status", $condition["status"]);
         }
 
-        return $activityListBuilder->orderByDesc("createdAt")->paginate();
+        return $activityListBuilder->orderByDesc("createdAt")->paginate(5);
     }
 
     /**
