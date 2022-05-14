@@ -39,8 +39,12 @@ class ActivityDto
     {
         return $this->activityModel->newQuery()->with([
             "organizers" => fn($query) => $query->select(["id", "name"]),
-            "categories" => fn($query) => $query->select(["id", "name"])
-        ])->where("id", $activityID)->first();
+            "categories" => fn($query) => $query->select(["id", "name"]),
+            "types" => fn($query) => $query->select(["id", "name", "desc"]),
+            "clockPoints" => fn($query) => $query->select(["id", "activityID", "clockPoint", "lat", "long"]),
+        ])->where("id", $activityID)->first()
+            ->setHidden(["updatedAt", "deletedAt", "typeID", "categoryID", "organizerID"])
+            ->append(["activityStatusText","redirectApi"]);
     }
 
     /**
@@ -49,11 +53,10 @@ class ActivityDto
     public function activityLatestByList()
     {
         $selectFields = [
-            "id", "title", "desc", "cover", "status", "acPerson", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
+            "id", "title", "cover", "status", "acPerson", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
         ];
 
-        return $this->activityModel->newQuery()->select($selectFields)->limit(5)
-            ->where("status", 2)
+        return $this->activityModel->newQuery()->select($selectFields)->limit(3)
             ->get()->map(fn($activity) => $activity->append(["activityStatusText"]));
     }
 
@@ -64,7 +67,7 @@ class ActivityDto
     public function activityListByCondition(array $condition)
     {
         $selectFields = [
-            "id", "title", "desc", "cover", "status", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
+            "id", "title", "cover", "status", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
         ];
 
         $activityListBuilder = $this->activityModel->newQuery()->select($selectFields);

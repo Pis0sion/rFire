@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Hyperf\Database\Model\Events\Saved;
 use Hyperf\Database\Model\Relations\BelongsTo;
 use Hyperf\Database\Model\Relations\BelongsToMany;
+use Hyperf\Database\Model\Relations\HasMany;
 use Hyperf\Di\Annotation\Inject;
 
 /**
@@ -31,7 +32,7 @@ class ActivityModel extends Model
      * @var string[]
      */
     protected $fillable = [
-        "title", "address", "desc", "typeID", "categoryID", "organizerID", "poster", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
+        "title", "address", "content", "typeID", "categoryID", "organizerID", "poster", "startEnrollAt", "endEnrollAt", "startAt", "endAt"
     ];
 
     public const CREATED_AT = "createdAt";
@@ -68,17 +69,22 @@ class ActivityModel extends Model
         return $this->belongsTo(ActivityCategoriesModel::class, "categoryID", "id");
     }
 
+    public function types()
+    {
+        return $this->belongsTo(TypeModel::class, "typeID", "id");
+    }
+
     /**
      * @return string
      */
     public function getActivityStatusTextAttribute(): string
     {
-        $activityStatusText = "报名未开启";
+        $activityStatusText = "活动待开启报名";
 
         if (Carbon::parse(Carbon::now())->gt($this->startEnrollAt) &&
             Carbon::parse(Carbon::now())->lte($this->endEnrollAt)
         ) {
-            $activityStatusText = "正在火热报名中";
+            $activityStatusText = "立即报名";
         }
 
         if (Carbon::parse(Carbon::now())->gt($this->endEnrollAt) &&
@@ -90,13 +96,21 @@ class ActivityModel extends Model
         if (Carbon::parse(Carbon::now())->gt($this->startAt) &&
             Carbon::parse(Carbon::now())->lte($this->endAt)
         ) {
-            $activityStatusText = "活动正在火热进行中";
+            $activityStatusText = "活动进行中";
         }
 
         if (Carbon::parse(Carbon::now())->gt($this->endAt)) {
             $activityStatusText = "活动已结束";
         }
         return $activityStatusText;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRedirectApiAttribute(): string
+    {
+        return "";
     }
 
     /**
@@ -114,17 +128,25 @@ class ActivityModel extends Model
     }
 
     /**
-     * @param Saved $event
+     * @return HasMany
      */
-    public function saved(Saved $event)
+    public function clockPoints()
     {
-        $activityModel = $event->getModel();
-
-        $delay = Carbon::now()->diffInSeconds($activityModel->getAttribute("startEnrollAt"));
-
-        $this->asyncActivityServlet->push([
-            "activityID" => $activityModel->getAttribute("id"),
-            "activityStatus" => ActivityStatusConstants::START_ENROLL_AT,
-        ], $delay);
+        return $this->hasMany(ClockPointsModel::class, "activityID", "id");
     }
+
+    /**
+     * @param int $activityStatus
+     * @return int
+     */
+    public function incrementAcPersonCount()
+    {
+        if ($this->getAttribute("status") == ActivityStatusConstants::END_AT) {
+
+            return $this->increment("acPerson");
+        }
+
+        return 0;
+    }
+
 }

@@ -29,23 +29,13 @@ class ActivityController
     /**
      * @throws ParametersException
      */
-    #[RequestMapping(path: "activity-details/{activityID}", methods: "GET")]
-    public function activity2Details(int $activityID)
+    #[RequestMapping(path: "activity-details/{activityID}", methods: ["POST", "GET"])]
+    public function activity2Details(RequestInterface $request, int $activityID)
     {
-        $activityDetails = $this->activityRepositories->activity2Details($activityID);
+        $openID = $request->input("token", null);
+        $activityDetails = $this->activityRepositories->activity2Details($activityID, $openID);
+
         return renderResponse($activityDetails);
-    }
-
-    /**
-     * @throws ParametersException
-     */
-    #[RequestMapping(path: "is-participate-activity/{activityID}", methods: "POST")]
-    public function isUserParticipate2Activity(int $activityID, RequestInterface $request)
-    {
-        $openID = $request->input("token");
-        $isParticipate = $this->activityRepositories->isUserParticipate2Activity($openID, $activityID);
-
-        return renderResponse(compact("isParticipate"));
     }
 
     #[RequestMapping(path: "activity-list", methods: "POST")]
@@ -63,4 +53,15 @@ class ActivityController
         $this->asyncActivityServlet->push($activityParameters);
         return renderResponse();
     }
+
+    #[RequestMapping(path: "start-activity/{activityID}", methods: "POST")]
+    public function startActivity2Go(int $activityID,RequestInterface $request)
+    {
+        $token = $request->input("token");
+
+        $this->activityRepositories->start2GoActivity($token, $activityID);
+        return renderResponse();
+    }
+
+
 }

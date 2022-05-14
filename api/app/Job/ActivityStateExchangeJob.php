@@ -48,13 +48,16 @@ class ActivityStateExchangeJob extends Job
     public function handle()
     {
 
-        $activityID = $this->params["activityID"] ?? false;
+        $activityID = (int)$this->params["activityID"] ?? false;
 
         $activityStatus = (int)$this->params["activityStatus"] ?? false;
 
         if (!$activityID || !$activityStatus) {
             return true;
         }
+
+        $this->params["activityID"] = $activityID;
+        $this->params["activityStatus"] = $activityStatus;
 
         /**
          * @var ActivityModel $activityDetails

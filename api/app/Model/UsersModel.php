@@ -8,7 +8,6 @@ use Hyperf\Database\Model\Collection;
 use Hyperf\Database\Model\Relations\BelongsToMany;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Db;
-use MongoDB\BSON\DBPointer;
 
 /**
  * \App\Model\UsersModel
@@ -54,11 +53,11 @@ class UsersModel extends Model
     public function enrollActivity()
     {
         $selectFields = [
-            "a_activity.id", "a_activity.title", "a_activity.desc", "a_activity.cover", "a_activity.status",
+            "a_activity.id", "a_activity.title", "a_activity.cover", "a_activity.status",
             "a_activity.startEnrollAt", "a_activity.endEnrollAt", "a_activity.startAt", "a_activity.endAt"
         ];
 
-        return $this->activity()->select($selectFields)->get()->makeHidden(["pivot"]);
+        return $this->activity()->select($selectFields)->orderByDesc("startEnrollAt")->get()->makeHidden(["pivot"])->map(fn($query) => $query->append(["activityStatusText"]));
     }
 
     /**
@@ -67,13 +66,12 @@ class UsersModel extends Model
     public function pendingActivity()
     {
         $selectFields = [
-            "a_activity.id", "a_activity.title", "a_activity.desc", "a_activity.cover", "a_activity.status",
+            "a_activity.id", "a_activity.title", "a_activity.cover", "a_activity.status",
             "a_activity.startEnrollAt", "a_activity.endEnrollAt", "a_activity.startAt", "a_activity.endAt"
         ];
 
         return $this->activity()->wherePivot("isActivity", "=", 0)
-            ->where("status", ActivityStatusConstants::END_AT)
-            ->select($selectFields)->get();
+            ->select($selectFields)->get()->map(fn($query) => $query->append(["activityStatusText"]));
     }
 
     /**
@@ -82,11 +80,12 @@ class UsersModel extends Model
     public function participateActivity()
     {
         $selectFields = [
-            "a_activity.id", "a_activity.title", "a_activity.desc", "a_activity.cover", "a_activity.status",
+            "a_activity.id", "a_activity.title", "a_activity.cover", "a_activity.status",
             "a_activity.startEnrollAt", "a_activity.endEnrollAt", "a_activity.startAt", "a_activity.endAt"
         ];
 
-        return $this->activity()->select($selectFields)->wherePivot("isActivity", "=", 1)->get();
+        return $this->activity()->select($selectFields)->wherePivot("isActivity", "=", 1)
+            ->get()->map(fn($query) => $query->append(["activityStatusText"]));
     }
 
     /**
